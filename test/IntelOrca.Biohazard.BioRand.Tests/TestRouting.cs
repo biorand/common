@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using IntelOrca.Biohazard.BioRand.Routing;
 using Xunit;
@@ -651,6 +652,38 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
 
                 Assert.True(route.AllNodesVisited);
             }
+        }
+
+        [Fact]
+        [Description("An edge case which failed due to over backtracking as route " +
+            "validation was being called before all keys were placed after expanding.")]
+        public void SingleUseKey_ValidationEdgeCase()
+        {
+            var builder = new DependencyGraphBuilder();
+
+            var key0 = builder.ConsumableKey(1, "KEY 0");
+            var key1 = builder.ReusuableKey(1, "KEY 1");
+            var room0 = builder.AndGate("ROOM 0");
+            var item0 = builder.Item(1, "ITEM 0", room0);
+            var item1 = builder.Item(1, "ITEM 1", room0);
+            var item2 = builder.Item(1, "ITEM 2", room0);
+            var room1 = builder.AndGate("ROOM 1", room0, key0);
+            var room2 = builder.AndGate("ROOM 2", room0, key1);
+            var room3 = builder.AndGate("ROOM 3", room2, key0);
+
+            var graph = builder.Build();
+            var route = graph.GenerateRoute(0, new RouteFinderOptions()
+            {
+                DebugDeadendCallback = g =>
+                {
+                    Assert.Fail("No deadend should have been reached");
+                }
+            });
+
+            AssertItem(route, item0, key0, key1);
+            AssertItem(route, item1, key0, key1);
+            AssertItem(route, item2, key0, key1);
+            Assert.True(route.AllNodesVisited);
         }
 
         [Fact]

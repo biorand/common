@@ -67,8 +67,6 @@ namespace IntelOrca.Biohazard.BioRand.Routing
             }
 
             state = Expand(state);
-            if (!ValidateState(state))
-                return state;
 
             // Choose to go down one way paths first
             state = FollowOneWayExits(options, state, rng, depth, ct);
@@ -92,6 +90,9 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                     }
 
                     var finalState = Fulfill(options, newState, rng, depth + 1, ct);
+                    if (!ValidateState(finalState))
+                        continue;
+
                     if (finalState.Next.Count == 0 && finalState.OneWay.Count == 0)
                     {
                         return finalState;
