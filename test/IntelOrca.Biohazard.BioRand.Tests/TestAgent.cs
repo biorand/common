@@ -16,13 +16,18 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
             await agent.RunAsync();
         }
 
-        private class Handler : IRandomizer, IRandomizerAgentHandler
+        private class Handler : IRandomizerAgentHandler
         {
-            public IRandomizer Randomizer => this;
             public RandomizerConfigurationDefinition ConfigurationDefinition => new RandomizerConfigurationDefinition();
             public RandomizerConfiguration DefaultConfiguration => new RandomizerConfiguration();
             public string BuildVersion => "1.0";
-            public RandomizerOutput Randomize(RandomizerInput input)
+
+            public Task<bool> CanGenerateAsync(RandomizerAgent.QueueResponseItem queueItem) => Task.FromResult(true);
+            public Task<RandomizerOutput> GenerateAsync(RandomizerAgent.QueueResponseItem queueItem, RandomizerInput input) => Task.FromResult(Randomize(input));
+            public void LogError(Exception ex, string message) => Assert.Fail(message);
+            public void LogInfo(string message) { }
+
+            private RandomizerOutput Randomize(RandomizerInput input)
             {
                 return new RandomizerOutput(
                     [
@@ -45,14 +50,8 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
                       <li>Reload from last checkpoint and try again.</li>
                       <li>Alter the enemy sliders slightly or reduce the number temporarily. This will reshuffle the enemies. Reload from last checkpoint and try again.</li> <li>As a last resort, change your seed, and reload from last checkpoint.</li>
                     </ol>
-                    """,
-                    []);
+                    """);
             }
-
-            public Task<bool> CanGenerateAsync(RandomizerAgent.QueueResponseItem queueItem) => Task.FromResult(true);
-            public Task<RandomizerOutput> GenerateAsync(RandomizerAgent.QueueResponseItem queueItem, RandomizerInput input) => Task.FromResult(Randomizer.Randomize(input));
-            public void LogError(Exception ex, string message) => Assert.Fail(message);
-            public void LogInfo(string message) { }
         }
     }
 }
