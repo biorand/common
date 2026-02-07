@@ -34,6 +34,7 @@ namespace IntelOrca.Biohazard.BioRand
 
         public sealed class Page(string label)
         {
+            public bool? Advanced { get; set; }
             public string Label { get; set; } = label;
             public List<Group> Groups { get; set; } = [];
 
@@ -47,6 +48,7 @@ namespace IntelOrca.Biohazard.BioRand
 
         public sealed class Group(string label)
         {
+            public bool? Advanced { get; set; }
             public string Label { get; set; } = label;
             public string? Warning { get; set; }
             public List<GroupItem> Items { get; set; } = [];
@@ -54,6 +56,7 @@ namespace IntelOrca.Biohazard.BioRand
 
         public sealed class GroupItem
         {
+            public bool? Advanced { get; set; }
             public string? Id { get; set; }
             public string? Label { get; set; }
             public string? Description { get; set; }
