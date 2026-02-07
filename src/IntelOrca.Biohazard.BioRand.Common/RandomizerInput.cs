@@ -2,7 +2,7 @@
 {
     public class RandomizerInput
     {
-        public string? GamePath { get; set; }
+        public string? UserName { get; set; }
         public string? ProfileName { get; set; }
         public string? ProfileDescription { get; set; }
         public string? ProfileAuthor { get; set; }

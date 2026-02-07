@@ -27,7 +27,6 @@ namespace IntelOrca.Biohazard.BioRand
         private CancellationTokenSource _runCts = new();
         private Task _runTask = Task.CompletedTask;
 
-        public IRandomizer Randomizer => _handler.Randomizer;
         public string BaseUri { get; }
         public string ApiKey { get; }
         public int GameId { get; }
@@ -128,8 +127,8 @@ namespace IntelOrca.Biohazard.BioRand
                 var response = await PostAsync<RegisterResponse>("generator/register", new
                 {
                     GameId,
-                    Randomizer.ConfigurationDefinition,
-                    Randomizer.DefaultConfiguration,
+                    _handler.ConfigurationDefinition,
+                    _handler.DefaultConfiguration,
                 });
                 Id = response.Id;
                 _handler.LogInfo($"Registered as agent {Id}");
@@ -254,7 +253,7 @@ namespace IntelOrca.Biohazard.BioRand
                             {
                                 Id,
                                 RandoId = q.Id,
-                                Version = Randomizer.BuildVersion
+                                Version = _handler.BuildVersion
                             });
                         }
                         catch (Exception ex)
@@ -278,11 +277,12 @@ namespace IntelOrca.Biohazard.BioRand
         {
             var randomizerInput = new RandomizerInput()
             {
-                Configuration = RandomizerConfiguration.FromJson(q.Config!),
+                UserName = q.UserName,
                 ProfileName = q.ProfileName,
                 ProfileAuthor = q.ProfileUserName,
                 ProfileDescription = q.ProfileDescription,
-                Seed = q.Seed
+                Seed = q.Seed,
+                Configuration = RandomizerConfiguration.FromJson(q.Config!)
             };
 
             try
