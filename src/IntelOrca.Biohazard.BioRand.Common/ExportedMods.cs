@@ -1,0 +1,127 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Reflection;
+
+namespace IntelOrca.Biohazard.BioRand
+{
+    public class Patcher
+    {
+        private static ImmutableArray<Type> _patches;
+        private static ImmutableArray<ExportModAttribute> _all;
+
+        private static ImmutableArray<Type> PatchTypes
+        {
+            get
+            {
+                if (_patches.IsDefault)
+                {
+                    var patches = new List<(Type, int)>();
+                    var assembly = Assembly.GetExecutingAssembly();
+                    foreach (var t in assembly.GetTypes())
+                    {
+                        if (t.GetInterfaces().Any(x => x == typeof(IPatch)))
+                        {
+                            var order = 0;
+                            var orderAttribute = t.GetCustomAttribute<OrderAttribute>();
+                            if (orderAttribute != null)
+                            {
+                                order = orderAttribute.Order;
+                            }
+                            patches.Add((t, order));
+                        }
+                    }
+                    _patches = patches
+                        .OrderBy(x => x.Item2)
+                        .Select(x => x.Item1)
+                        .ToImmutableArray();
+                }
+                return _patches;
+            }
+        }
+
+        private static ImmutableArray<ExportModAttribute> All
+        {
+            get
+            {
+                if (_all.IsDefault)
+                {
+                    _all = PatchTypes
+                        .Select(x => x.GetCustomAttribute<ExportModAttribute>()!)
+                        .Where(x => x != null)
+                        .ToImmutableArray();
+                }
+                return _all;
+            }
+        }
+
+        private static void ApplyPatch(Type type, IPatchContext context)
+        {
+            var ctors = type.GetConstructors();
+            if (ctors.Length > 1)
+                throw new NotSupportedException($"Only one constructor supported for {nameof(IPatch)}");
+
+            var ctor = ctors[0];
+            var ctorParameters = ctor.GetParameters().ToArray();
+            var ctorArguments = new object?[ctorParameters.Length];
+            for (var i = 0; i < ctorArguments.Length; i++)
+            {
+                if (ctorParameters[i].ParameterType == typeof(IPatchContext))
+                {
+                    ctorArguments[i] = context;
+                }
+            }
+
+            var patchInstance = (IPatch)Activator.CreateInstance(type, ctorArguments)!;
+            patchInstance.Apply();
+        }
+
+#if false
+        public static ModBuilder ExportMod(string inputPath, string name)
+        {
+            var exportedModAttribute = All.FirstOrDefault(x => x.Name == name)
+                ?? throw new ArgumentException($"{name} not found", nameof(name));
+            var type = PatchTypes.FirstOrDefault(x => x.GetCustomAttribute<ExportModAttribute>()?.Name == exportedModAttribute.Name)
+                ?? throw new Exception($"Type for {name} not found");
+
+            var vanilla = new RePakCollection(inputPath);
+            var modBuilder = new ModBuilder
+            {
+                Name = exportedModAttribute.Name,
+                Description = exportedModAttribute.Description,
+                Version = exportedModAttribute.Version,
+                Author = exportedModAttribute.Author
+            };
+
+            var patchContext = new PatchContext(vanilla, modBuilder);
+            ApplyPatch(type, null, patchContext);
+
+            return modBuilder;
+        }
+#endif
+
+        internal void ApplyAll(IPatchContext context)
+        {
+            foreach (var patchType in PatchTypes)
+            {
+                ApplyPatch(patchType, context);
+            }
+        }
+
+#if false
+        private class PatchContext(IPakFile vanilla, ModBuilder modBuilder) : IPatchContext
+        {
+            public RszTypeRepository TypeRepository => Re4rTypeRepository.FromVersion(5);
+            public DynamicData DynamicData { get; } = new DynamicData(download: false);
+
+            public byte[]? GetSupplementFile(string path) => EmbeddedData.GetFile(path);
+            public byte[]? GetFile(string path) => modBuilder[path] ?? vanilla.GetEntryData(path);
+            public void SetFile(string path, byte[] data) => modBuilder[path] = data;
+            public T? GetConfigOption<T>(string key, T? defaultValue = default) => defaultValue;
+            public T GetService<T>() => throw new NotSupportedException();
+            public bool ExportingMod => true;
+        }
+#endif
+    }
+}
