@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace IntelOrca.Biohazard.BioRand
@@ -68,6 +68,7 @@ namespace IntelOrca.Biohazard.BioRand
             public double? Step { get; set; }
             public string[]? Options { get; set; }
             public object? Default { get; set; }
+            public int? Multiplier { get; set; }
         }
 
         public sealed class GroupItemCategory
