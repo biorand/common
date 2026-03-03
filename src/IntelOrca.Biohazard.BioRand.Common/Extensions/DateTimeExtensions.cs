@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
-namespace IntelOrca.Biohazard.BioRand.Common.Extensions
+namespace IntelOrca.Biohazard.BioRand.Extensions
 {
-    internal static class DateTimeExtensions
+    public static class DateTimeExtensions
     {
         public static long ToUnixTimeSeconds(this DateTime dt)
         {

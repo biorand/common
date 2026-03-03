@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Text.Json;
 
 namespace IntelOrca.Biohazard.BioRand.Extensions
 {
-    internal static class JsonExtensions
+    public static class JsonExtensions
     {
         public static string ToJson(this object o, bool indented = true, bool camelCase = false)
         {

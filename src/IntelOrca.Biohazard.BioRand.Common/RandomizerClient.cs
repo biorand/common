@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace IntelOrca.Biohazard.BioRand.Common
+namespace IntelOrca.Biohazard.BioRand
 {
     public class RandomizerClient(string baseUri)
     {

@@ -14,6 +14,7 @@
     <RepositoryUrl>https://github.com/biorand/biorand-common</RepositoryUrl>
     <PackageTags>resident evil,biohazard,biorand,randomizer</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RootNamespace>IntelOrca.Biohazard.BioRand</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\icon.png">
