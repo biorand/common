@@ -1,16 +1,18 @@
+using IntelOrca.Biohazard.REE.Rsz;
+
 namespace IntelOrca.Biohazard.BioRand
 {
-    internal interface IPatch
-    {
-        void Apply();
-    }
-
-    internal interface IPatchContext
+    public interface IReeContext
     {
         /// <summary>
         /// Gets whether we are exporting the mod variant of this patch, or generating a randomizer seed.
         /// </summary>
         bool ExportingMod { get; }
+
+        /// <summary>
+        /// Gets the RSZ type repository.
+        /// </summary>
+        RszTypeRepository TypeRepository { get; }
 
         /// <summary>
         /// Gets a custom service.

@@ -56,7 +56,7 @@ namespace IntelOrca.Biohazard.BioRand
             }
         }
 
-        private static void ApplyPatch(Type type, IPatchContext context)
+        private static void ApplyPatch(Type type, IReeContext context)
         {
             var ctors = type.GetConstructors();
             if (ctors.Length > 1)
@@ -67,7 +67,7 @@ namespace IntelOrca.Biohazard.BioRand
             var ctorArguments = new object?[ctorParameters.Length];
             for (var i = 0; i < ctorArguments.Length; i++)
             {
-                if (ctorParameters[i].ParameterType == typeof(IPatchContext))
+                if (ctorParameters[i].ParameterType == typeof(IReeContext))
                 {
                     ctorArguments[i] = context;
                 }
@@ -101,7 +101,7 @@ namespace IntelOrca.Biohazard.BioRand
         }
 #endif
 
-        internal void ApplyAll(IPatchContext context)
+        internal void ApplyAll(IReeContext context)
         {
             foreach (var patchType in PatchTypes)
             {

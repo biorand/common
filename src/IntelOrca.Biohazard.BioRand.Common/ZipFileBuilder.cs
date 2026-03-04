@@ -4,7 +4,7 @@ using System.IO.Compression;
 
 namespace IntelOrca.Biohazard.BioRand
 {
-    internal class ZipFileBuilder
+    public class ZipFileBuilder
     {
         private readonly Dictionary<string, byte[]> _entries = [];
 
