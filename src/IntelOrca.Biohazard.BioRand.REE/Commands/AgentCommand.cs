@@ -65,11 +65,11 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
         private class RandomizerAgentHandler(IReeRandomizer randomizer, string gameInputPath, bool beta) : IRandomizerAgentHandler
         {
             public string BuildVersion => randomizer.Version;
-            public RandomizerConfigurationDefinition ConfigurationDefinition => randomizer.GetConfigurationDefinition(new RandomizerOptions()
+            public RandomizerConfigurationDefinition ConfigurationDefinition => randomizer.GetConfigurationDefinitionAsync(new RandomizerOptions()
             {
                 GameInputPath = gameInputPath,
                 Beta = beta
-            });
+            }).Result;
             public RandomizerConfiguration DefaultConfiguration => ConfigurationDefinition.GetDefault();
 
             public Task<bool> CanGenerateAsync(RandomizerAgent.QueueResponseItem queueItem)
@@ -77,14 +77,15 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
                 return Task.FromResult(true);
             }
 
-            public Task<RandomizerOutput> GenerateAsync(RandomizerAgent.QueueResponseItem queueItem, RandomizerInput input)
+            public async Task<RandomizerOutput> GenerateAsync(RandomizerAgent.QueueResponseItem queueItem, RandomizerInput input)
             {
-                return Task.FromResult(randomizer.Generate(input, new RandomizerOptions()
+                var generator = await randomizer.CreateGeneratorAsync(input, new RandomizerOptions()
                 {
                     GameInputPath = gameInputPath,
                     Beta = beta,
                     UserTags = queueItem.UserTags.ToImmutableArray()
-                }, new DummyRandomizerProgress()));
+                }, new DummyRandomizerProgress());
+                return await generator.GenerateAsync();
             }
 
             public void LogInfo(string message) => AnsiConsole.MarkupLine($"[gray]{Timestamp} {message}[/]");

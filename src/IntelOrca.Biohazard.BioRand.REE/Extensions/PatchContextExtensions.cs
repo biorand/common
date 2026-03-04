@@ -1,72 +1,71 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using IntelOrca.Biohazard.BioRand;
 using IntelOrca.Biohazard.BioRand.Extensions;
 using IntelOrca.Biohazard.REE.Messages;
 using IntelOrca.Biohazard.REE.Rsz;
 
-namespace BioRand.RE9
+namespace IntelOrca.Biohazard.BioRand.REE.Extensions
 {
     public static class PatchContextExtensions
     {
-        public static void SetFile(this IReeContext context, string path, ReadOnlyMemory<byte> data) =>
+        public static void SetFile(this IReeRandomizerContext context, string path, ReadOnlyMemory<byte> data) =>
             context.SetFile(path, data.ToArray());
 
-        public static bool Exists(this IReeContext context, string path) => context.GetFile(path) != null;
+        public static bool Exists(this IReeRandomizerContext context, string path) => context.TryGetFile(path) != null;
 
-        public static byte[] GetFileOrFail(this IReeContext context, string path)
+        public static byte[] GetFile(this IReeRandomizerContext context, string path)
         {
-            var data = context.GetFile(path) ?? throw new RandomizerUserException($"Unable to read '{path}'");
+            var data = context.TryGetFile(path) ?? throw new RandomizerUserException($"Unable to read '{path}'");
             return data;
         }
 
-        public static PfbFile GetPfbFile(this IReeContext context, string path)
+        public static PfbFile GetPfbFile(this IReeRandomizerContext context, string path)
         {
-            return new PfbFile(17, GetFileOrFail(context, path));
+            return new PfbFile(17, GetFile(context, path));
         }
 
-        public static void ModifyPfbFile(this IReeContext context, string path, Func<RszScene, RszScene> callback)
+        public static void ModifyPfbFile(this IReeRandomizerContext context, string path, Func<RszScene, RszScene> callback)
         {
             var pfbFile = context.GetPfbFile(path).ToBuilder(context.TypeRepository);
             pfbFile.Scene = callback(pfbFile.Scene);
             context.SetPfbFile(path, pfbFile.AddMissingResources().Build());
         }
 
-        public static void SetPfbFile(this IReeContext context, string path, PfbFile value)
+        public static void SetPfbFile(this IReeRandomizerContext context, string path, PfbFile value)
         {
             context.SetFile(path, value.Data);
         }
 
-        public static ScnFile GetScnFile(this IReeContext context, string path)
+        public static ScnFile GetScnFile(this IReeRandomizerContext context, string path)
         {
-            return new ScnFile(20, GetFileOrFail(context, path));
+            return new ScnFile(20, GetFile(context, path));
         }
 
-        public static void ModifyScnFile(this IReeContext context, string path, Func<RszScene, RszScene> callback)
+        public static void ModifyScnFile(this IReeRandomizerContext context, string path, Func<RszScene, RszScene> callback)
         {
             var scnFile = context.GetScnFile(path).ToBuilder(context.TypeRepository);
             scnFile.Scene = callback(scnFile.Scene);
             context.SetScnFile(path, scnFile.AddMissingResources().Build());
         }
 
-        public static void SetScnFile(this IReeContext context, string path, ScnFile value)
+        public static void SetScnFile(this IReeRandomizerContext context, string path, ScnFile value)
         {
             context.SetFile(path, value.Data);
         }
 
-        public static UserFile GetUserFile(this IReeContext context, string path)
+        public static UserFile GetUserFile(this IReeRandomizerContext context, string path)
         {
-            return new UserFile(GetFileOrFail(context, path));
+            return new UserFile(GetFile(context, path));
         }
 
-        public static T DeserializeUserFile<T>(this IReeContext context, string path)
+        public static T DeserializeUserFile<T>(this IReeRandomizerContext context, string path)
         {
             var userFile = context.GetUserFile(path);
             return RszSerializer.Deserialize<T>(userFile.GetObjects(context.TypeRepository)[0])!;
         }
 
-        public static void SerializeUserFile<T>(this IReeContext context, string path, T value)
+        public static void SerializeUserFile<T>(this IReeRandomizerContext context, string path, T value)
         {
             var userFile = context.GetUserFile(path);
             var builder = userFile.ToBuilder(context.TypeRepository);
@@ -75,12 +74,12 @@ namespace BioRand.RE9
             context.SetUserFile(path, builder.Build());
         }
 
-        public static void SetUserFile(this IReeContext context, string path, UserFile value)
+        public static void SetUserFile(this IReeRandomizerContext context, string path, UserFile value)
         {
             context.SetFile(path, value.Data);
         }
 
-        public static void ModifyUserFile(this IReeContext context, string path, Func<RszObjectNode, RszObjectNode> callback)
+        public static void ModifyUserFile(this IReeRandomizerContext context, string path, Func<RszObjectNode, RszObjectNode> callback)
         {
             var userFile = context.GetUserFile(path);
             var builder = userFile.ToBuilder(context.TypeRepository);
@@ -88,22 +87,22 @@ namespace BioRand.RE9
             context.SetUserFile(path, builder.Build());
         }
 
-        public static void ModifyUserFile<T>(this IReeContext context, string path, Func<T, T> callback)
+        public static void ModifyUserFile<T>(this IReeRandomizerContext context, string path, Func<T, T> callback)
         {
             SerializeUserFile(context, path, callback(DeserializeUserFile<T>(context, path)));
         }
 
-        public static MsgFile GetMsgFile(this IReeContext context, string path)
+        public static MsgFile GetMsgFile(this IReeRandomizerContext context, string path)
         {
-            return new MsgFile(GetFileOrFail(context, path));
+            return new MsgFile(GetFile(context, path));
         }
 
-        public static void SetMsgFile(this IReeContext context, string path, MsgFile msg)
+        public static void SetMsgFile(this IReeRandomizerContext context, string path, MsgFile msg)
         {
             context.SetFile(path, msg.Data.ToArray());
         }
 
-        public static void ModifyMsgFile(this IReeContext context, string path, Action<MsgFile.Builder> callback)
+        public static void ModifyMsgFile(this IReeRandomizerContext context, string path, Action<MsgFile.Builder> callback)
         {
             var msgFile = context.GetMsgFile(path);
             var builder = msgFile.ToBuilder();
@@ -111,7 +110,7 @@ namespace BioRand.RE9
             context.SetMsgFile(path, builder.Build());
         }
 
-        public static void ApplyOverlay(this IReeContext context, byte[] zipData)
+        public static void ApplyOverlay(this IReeRandomizerContext context, byte[] zipData)
         {
             var supplementZip = new ZipArchive(new MemoryStream(zipData));
             foreach (var entry in supplementZip.Entries)

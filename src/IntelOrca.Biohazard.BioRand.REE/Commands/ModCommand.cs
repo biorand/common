@@ -1,3 +1,6 @@
+using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Spectre.Console.Cli;
 
@@ -19,14 +22,20 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
 
         public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
         {
-#if false
+            var randomizer = (IReeRandomizer)context.Data!;
+            var generator = await randomizer.CreateGeneratorAsync(new RandomizerInput(), new RandomizerOptions()
+            {
+                GameInputPath = settings.InputPath ?? ""
+            }, new DummyRandomizerProgress());
+
+            var patcher = new Patcher();
             if (settings.Mods == null || settings.Mods.Length == 0)
             {
-                PrintMods();
+                PrintMods(patcher);
                 return 2;
             }
 
-            var mods = ExportedMods.All;
+            var mods = patcher.Mods;
             foreach (var mod in settings.Mods)
             {
                 if (!mods.Any(x => x.Name.Equals(mod, StringComparison.OrdinalIgnoreCase)))
@@ -48,28 +57,23 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
                 return 1;
             }
 
-
             foreach (var mod in settings.Mods)
             {
                 var modAttribute = mods.First(x => x.Name.Equals(mod, StringComparison.OrdinalIgnoreCase));
-                var modBuilder = ExportedMods.ExportMod(settings.InputPath, modAttribute.Name);
+                var modBuilder = patcher.ExportMod(generator, modAttribute.Name);
                 modBuilder.SavePakFile(Path.Combine(settings.OutputPath, modAttribute.FileName + ".pak"));
                 modBuilder.SaveFluffyZipFile(Path.Combine(settings.OutputPath, modAttribute.FileName + ".zip"));
             }
-#endif
             return 0;
         }
 
-#if false
-        private void PrintMods()
+        private void PrintMods(Patcher patcher)
         {
             Console.WriteLine("Available mods:");
-            var exportedMods = ExportedMods.All;
-            foreach (var mod in exportedMods)
+            foreach (var mod in patcher.Mods)
             {
                 Console.WriteLine($"  {mod.Name} {mod.Version} by {mod.Author}");
             }
         }
-#endif
     }
 }

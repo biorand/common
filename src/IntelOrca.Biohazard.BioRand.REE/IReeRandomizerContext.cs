@@ -1,8 +1,8 @@
 using IntelOrca.Biohazard.REE.Rsz;
 
-namespace IntelOrca.Biohazard.BioRand
+namespace IntelOrca.Biohazard.BioRand.REE
 {
-    public interface IReeContext
+    public interface IReeRandomizerContext
     {
         /// <summary>
         /// Gets whether we are exporting the mod variant of this patch, or generating a randomizer seed.
@@ -35,7 +35,7 @@ namespace IntelOrca.Biohazard.BioRand
         /// </summary>
         /// <param name="path">E.g. "natives/stm/_chainsaw/appsystem/ui/userdata/itemdefinitionuserdata.user.2"</param>
         /// <returns>The raw file data.</returns>
-        byte[]? GetFile(string path);
+        byte[]? TryGetFile(string path);
 
         /// <summary>
         /// Replaces a file with new data.

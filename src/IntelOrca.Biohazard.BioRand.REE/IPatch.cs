@@ -1,6 +1,6 @@
-namespace IntelOrca.Biohazard.BioRand
+namespace IntelOrca.Biohazard.BioRand.REE
 {
-    internal interface IPatch
+    public interface IPatch
     {
         void Apply();
     }

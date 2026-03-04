@@ -60,7 +60,7 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
             var reporter = new ConsoleReporter();
             if (settings.Kill && randomizer.ProcessName is string processName)
             {
-                reporter.RunTask("Killing re4.exe", () => KillGameProcess(processName));
+                reporter.RunTask($"Killing {processName}.exe", () => KillGameProcess(processName));
             }
 
             RandomizerInput input;
@@ -82,10 +82,11 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
             }
 
             AnsiConsole.MarkupLine($"Generating seed {input.Seed}...");
-            var output = randomizer.Generate(input, new RandomizerOptions()
+            var gennerator = await randomizer.CreateGeneratorAsync(input, new RandomizerOptions()
             {
                 GameInputPath = settings.InputPath ?? ""
             }, reporter);
+            var output = await gennerator.GenerateAsync();
 
             foreach (var asset in output.Assets)
             {

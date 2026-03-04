@@ -4,7 +4,7 @@ using System.IO;
 using IntelOrca.Biohazard.REE;
 using IntelOrca.Biohazard.REE.Package;
 
-namespace IntelOrca.Biohazard.BioRand
+namespace IntelOrca.Biohazard.BioRand.REE
 {
     internal class FileRepository : IDisposable
     {

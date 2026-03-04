@@ -4,16 +4,16 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using IntelOrca.Biohazard.BioRand.Extensions;
-using IntelOrca.Biohazard.BioRand.REE;
 using IntelOrca.Biohazard.REE;
 using IntelOrca.Biohazard.REE.Cryptography;
 using IntelOrca.Biohazard.REE.Rsz;
 using Spectre.Console;
 
-namespace IntelOrca.Biohazard.BioRand
+namespace IntelOrca.Biohazard.BioRand.REE
 {
-    public abstract class ReeRandomizerContext : IReeContext
+    public abstract class ReeRandomizerGenerator : IReeRandomizerGenerator
     {
         private readonly Dictionary<Type, object> _services = [];
         private readonly object _servicesLock = new();
@@ -25,7 +25,7 @@ namespace IntelOrca.Biohazard.BioRand
         public RandomizerOptions Options { get; }
         public IRandomizerProgress Progress { get; }
 
-        public ReeRandomizerContext(
+        public ReeRandomizerGenerator(
             IReeRandomizer randomizer,
             RandomizerInput input,
             RandomizerOptions options,
@@ -37,10 +37,10 @@ namespace IntelOrca.Biohazard.BioRand
             Progress = progress;
         }
 
-        public RandomizerOutput Generate()
+        public Task<RandomizerOutput> GenerateAsync()
         {
             GenerateCampaigns();
-            return BuildMod();
+            return Task.FromResult(BuildMod());
         }
 
         public virtual void GenerateCampaigns()
@@ -250,7 +250,7 @@ namespace IntelOrca.Biohazard.BioRand
             }
         }
 
-        public byte[]? GetFile(string path) => FileRepository.GetFile(path);
+        public byte[]? TryGetFile(string path) => FileRepository.GetFile(path);
         public void SetFile(string path, byte[] data) => FileRepository.SetFile(path, data);
 
         private FileRepository FileRepository
@@ -265,7 +265,7 @@ namespace IntelOrca.Biohazard.BioRand
             }
         }
 
-        bool IReeContext.ExportingMod => throw new NotImplementedException();
+        bool IReeRandomizerContext.ExportingMod => throw new NotImplementedException();
 
         private sealed class RandomizerLoggerIO
         {

@@ -1,12 +1,12 @@
-namespace IntelOrca.Biohazard.BioRand
+namespace IntelOrca.Biohazard.BioRand.REE
 {
     public abstract class Modifier
     {
-        public virtual void LogState(IReeContext context, RandomizerLogger logger)
+        public virtual void LogState(IReeRandomizerContext context, RandomizerLogger logger)
         {
         }
 
-        public virtual void Apply(IReeContext context, RandomizerLogger logger)
+        public virtual void Apply(IReeRandomizerContext context, RandomizerLogger logger)
         {
         }
     }
