@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace IntelOrca.Biohazard.BioRand.Routing
 {
@@ -11,7 +11,7 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         public bool IsDefault => id == 0;
         public int CompareTo(Key other) => id.CompareTo(other.Id);
         public override int GetHashCode() => id.GetHashCode();
-        public override bool Equals(object obj) => obj is Key k && Equals(k);
+        public override bool Equals(object? obj) => obj is Key k && Equals(k);
         public bool Equals(Key other) => id == other.Id;
         public override string ToString() => $"#{Id} ({Label})" ?? $"#{Id}";
         public static bool operator ==(Key lhs, Key rhs) => lhs.Equals(rhs);

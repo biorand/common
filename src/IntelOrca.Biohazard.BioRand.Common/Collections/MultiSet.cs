@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace IntelOrca.Biohazard.BioRand.Collections
 {
-    internal class MultiSet<T> : ICollection<T>, IEnumerable<T>
+    internal class MultiSet<T> : ICollection<T>, IEnumerable<T> where T : notnull
     {
         private readonly Dictionary<T, int> _dict = new Dictionary<T, int>();
         private int _count;

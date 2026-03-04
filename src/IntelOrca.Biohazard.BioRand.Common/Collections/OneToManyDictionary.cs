@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace IntelOrca.Biohazard.BioRand.Collections
@@ -12,7 +12,7 @@ namespace IntelOrca.Biohazard.BioRand.Collections
 
         public TMany this[TOne key] => _keyToValue[key];
 
-        public bool TryGetValue(TOne key, out TMany value) => _keyToValue.TryGetValue(key, out value);
+        public bool TryGetValue(TOne key, out TMany? value) => _keyToValue.TryGetValue(key, out value);
 
         public void Add(TOne key, TMany value)
         {

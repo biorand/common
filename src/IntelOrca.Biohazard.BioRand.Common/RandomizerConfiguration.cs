@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -39,7 +39,7 @@ namespace IntelOrca.Biohazard.BioRand
             set => _dict[key] = value;
         }
 
-        public bool TryGetValue(string key, out object value)
+        public bool TryGetValue(string key, out object? value)
         {
             return _dict.TryGetValue(key, out value);
         }
@@ -48,7 +48,7 @@ namespace IntelOrca.Biohazard.BioRand
         {
             if (TryGetValue(key, out var value))
             {
-                return (T)Convert.ChangeType(value, typeof(T));
+                return (T)Convert.ChangeType(value, typeof(T))!;
             }
             else
             {

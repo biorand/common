@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <Version>1.5.0</Version>
+    <Authors>Ted John</Authors>
+    <Product>$(AssemblyName)</Product>
+    <Copyright>Copyright (C) Ted John 2024-2026</Copyright>
+    <PackageProjectUrl>https://github.com/biorand/biorand-common</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/biorand/biorand-common</RepositoryUrl>
+    <PackageTags>resident evil,biohazard,biorand,randomizer</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+</Project>

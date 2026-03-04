@@ -378,7 +378,7 @@ namespace IntelOrca.Biohazard.BioRand
                 }
                 else
                 {
-                    form.Add(new StringContent(kvp.Value.ToString()), kvp.Key);
+                    form.Add(new StringContent(kvp.Value.ToString() ?? ""), kvp.Key);
                 }
             }
 

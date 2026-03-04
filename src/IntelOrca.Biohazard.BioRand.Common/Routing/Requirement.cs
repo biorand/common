@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace IntelOrca.Biohazard.BioRand.Routing
 {
@@ -40,9 +40,9 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         }
 
         public bool Equals(Requirement other) => _isSoft == other._isSoft && _value.Equals(other._value);
-        public override bool Equals(object obj) => obj is Requirement other && Equals(other);
+        public override bool Equals(object? obj) => obj is Requirement other && Equals(other);
         public override int GetHashCode() => !_isSoft ? _value.GetHashCode() : 3 * _value.GetHashCode();
-        public override string ToString() => _value.ToString();
+        public override string? ToString() => _value.ToString();
 
         public static bool operator ==(Requirement lhs, Requirement rhs) => lhs.Equals(rhs);
         public static bool operator !=(Requirement lhs, Requirement rhs) => lhs != rhs;
