@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using IntelOrca.Biohazard.BioRand.Extensions;
 using IntelOrca.Biohazard.REE;
 using IntelOrca.Biohazard.REE.Cryptography;
+using IntelOrca.Biohazard.REE.Package;
 using IntelOrca.Biohazard.REE.Rsz;
 using Spectre.Console;
 
@@ -118,6 +119,7 @@ namespace IntelOrca.Biohazard.BioRand.REE
 
         protected virtual void OnBuildMod(ModBuilder builder) { }
 
+        public PakList PakList => Randomizer.PakList;
         public abstract RszTypeRepository TypeRepository { get; }
         public abstract string PakName { get; }
 
@@ -264,6 +266,7 @@ namespace IntelOrca.Biohazard.BioRand.REE
                 return _fileRepository;
             }
         }
+
 
         bool IReeRandomizerContext.ExportingMod => throw new NotImplementedException();
 

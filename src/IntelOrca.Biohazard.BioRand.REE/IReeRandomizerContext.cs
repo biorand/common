@@ -1,3 +1,4 @@
+using IntelOrca.Biohazard.REE.Package;
 using IntelOrca.Biohazard.REE.Rsz;
 
 namespace IntelOrca.Biohazard.BioRand.REE
@@ -5,9 +6,19 @@ namespace IntelOrca.Biohazard.BioRand.REE
     public interface IReeRandomizerContext
     {
         /// <summary>
+        /// Get the randomizer this context is for.
+        /// </summary>
+        IReeRandomizer Randomizer { get; }
+
+        /// <summary>
         /// Gets whether we are exporting the mod variant of this patch, or generating a randomizer seed.
         /// </summary>
         bool ExportingMod { get; }
+
+        /// <summary>
+        /// Gets the full pak file list.
+        /// </summary>
+        PakList PakList { get; }
 
         /// <summary>
         /// Gets the RSZ type repository.
@@ -49,5 +60,12 @@ namespace IntelOrca.Biohazard.BioRand.REE
         /// </summary>
         /// <param name="path">E.g. "flamethrower.zip" or "wpstats.csv".</param>
         byte[]? GetSupplementFile(string path);
+
+        /// <summary>
+        /// Get an rng based on the seed and the given keys.
+        /// </summary>
+        /// <param name="key">Zero or more objects to call ToString() and hashed with the seed.</param>
+        /// <returns>An rng.</returns>
+        Rng GetRng(params object[] key);
     }
 }
