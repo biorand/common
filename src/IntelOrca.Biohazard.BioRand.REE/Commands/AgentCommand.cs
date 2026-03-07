@@ -30,14 +30,14 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
 
         public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
         {
-            var randomizerFactory = (IReeRandomizer)context.Data!;
-
-            var gameId = await GetGameIdAsync(settings.Host, "re8");
+            var randomizer = (IReeRandomizer)context.Data!;
+            var gameId = await GetGameIdAsync(settings.Host, randomizer.GameMoniker)
+                    ?? throw new Exception($"{randomizer.GameMoniker} not registered");
             var agent = new RandomizerAgent(
                 settings.Host,
                 settings.ApiKey,
-                1,
-                new RandomizerAgentHandler(randomizerFactory, settings.InputPath, settings.Beta));
+                gameId,
+                new RandomizerAgentHandler(randomizer, settings.InputPath, settings.Beta));
             var cts = new CancellationTokenSource();
             Console.CancelKeyPress += (sender, e) =>
             {
