@@ -8,6 +8,7 @@ namespace IntelOrca.Biohazard.BioRand
 
         public void RunTask(string text, Action cb)
         {
+            cb();
         }
     }
 }
