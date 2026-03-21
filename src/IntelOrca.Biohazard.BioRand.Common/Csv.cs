@@ -75,27 +75,46 @@ namespace IntelOrca.Biohazard.BioRand
 
         internal static readonly string[] g_separator = ["\r\n", "\n"];
 
-        private static object ParseValue(string input, Type targetType)
+        private static object? ParseValue(string input, Type targetType)
         {
-            if (targetType.IsGenericType && targetType.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
+            if (string.IsNullOrWhiteSpace(input))
             {
-                var elementType = targetType.GenericTypeArguments[0];
-                var items = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
-                return ToImmutableArray(elementType, items
-                    .Select(x => ParseValue(x, elementType)));
+                if (IsNullable(targetType))
+                    return null;
+
+                return Activator.CreateInstance(targetType);
             }
-            else if (targetType == typeof(Guid))
+
+            Type underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+
+            if (underlyingType.IsGenericType &&
+                underlyingType.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
+            {
+                Type elementType = underlyingType.GenericTypeArguments[0];
+                string[] source = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
+
+                return ToImmutableArray(
+                    elementType,
+                    source.Select(x => ParseValue(x, elementType))
+                );
+            }
+
+            if (underlyingType == typeof(Guid))
             {
                 return Guid.Parse(input);
             }
-            else if (targetType.IsEnum)
+
+            if (underlyingType.IsEnum)
             {
-                return Enum.Parse(targetType, input, ignoreCase: true);
+                return Enum.Parse(underlyingType, input, ignoreCase: true);
             }
-            else
-            {
-                return Convert.ChangeType(input, targetType);
-            }
+
+            return Convert.ChangeType(input, underlyingType);
+        }
+
+        private static bool IsNullable(Type type)
+        {
+            return Nullable.GetUnderlyingType(type) != null;
         }
 
         private static object ToImmutableArray(Type elementType, IEnumerable<object> items)
