@@ -12,7 +12,9 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_BasicMapping_Works()
         {
-            var csv = "Id,Name\n1,Alice\n2,Bob";
+            var csv = @"Id,Name
+1,Alice
+2,Bob";
 
             var result = Csv.Deserialize<BasicModel>(Utf8(csv));
 
@@ -28,7 +30,9 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_Enum_Works()
         {
-            var csv = "Value\nA\nB";
+            var csv = @"Value
+A
+B";
 
             var result = Csv.Deserialize<EnumModel>(Utf8(csv));
 
@@ -39,7 +43,10 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_NullableEnum_Works()
         {
-            var csv = "EnumValue\nA\n\nC";
+            var csv = @"EnumValue
+A
+
+C";
 
             var result = Csv.Deserialize<NullableModel>(Utf8(csv));
 
@@ -51,7 +58,10 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_NullableInt_Works()
         {
-            var csv = "Value\n1\n\n3";
+            var csv = @"Value
+1
+
+3";
 
             var result = Csv.Deserialize<NullableModel>(Utf8(csv));
 
@@ -63,7 +73,9 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_ImmutableArray_Works()
         {
-            var csv = "Numbers\n1 2 3\n4 5";
+            var csv = @"Numbers
+1 2 3
+4 5";
 
             var result = Csv.Deserialize<ArrayModel>(Utf8(csv));
 
@@ -75,7 +87,8 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         public void Deserialize_Guid_Works()
         {
             var guid = Guid.NewGuid();
-            var csv = $"Id\n{guid}";
+            var csv = $@"Id
+{guid}";
 
             var result = Csv.Deserialize<GuidModel>(Utf8(csv));
 
@@ -85,9 +98,13 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_QuotedFields_WithComma_Works()
         {
-            var csv = "Name\n\"Alice, Smith\"\nBob";
+            var csv = @"Name
+""Alice, Smith""
+Bob";
 
-            var result = Csv.Deserialize<BasicModel>(Utf8("Id,Name\n1,\"Alice, Smith\"\n2,Bob"));
+            var result = Csv.Deserialize<BasicModel>(Utf8(@"Id,Name
+1,""Alice, Smith""
+2,Bob"));
 
             Assert.Equal("Alice, Smith", result[0].Name);
             Assert.Equal("Bob", result[1].Name);
@@ -96,9 +113,14 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_QuotedFields_WithEscapedQuotes_Works()
         {
-            var csv = "Name\n\"Alice \"\"The Great\"\"\"\nBob";
+            var csv = @"
+Name
+""Alice """"The Great""""""
+Bob";
 
-            var result = Csv.Deserialize<BasicModel>(Utf8("Id,Name\n1,\"Alice \"\"The Great\"\"\"\n2,Bob"));
+            var result = Csv.Deserialize<BasicModel>(Utf8(@"Id,Name
+1,""Alice """"The Great""""""
+2,Bob"));
 
             Assert.Equal("Alice \"The Great\"", result[0].Name);
         }
@@ -106,7 +128,8 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_MissingColumn_Ignored()
         {
-            var csv = "Id,Unknown\n1,X";
+            var csv = @"Id,Unknown
+1,X";
 
             var result = Csv.Deserialize<BasicModel>(Utf8(csv));
 
@@ -117,7 +140,8 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public void Deserialize_ExtraColumns_Ignored()
         {
-            var csv = "Id,Name,Extra\n1,Alice,X";
+            var csv = @"Id,Name,Extra
+1,Alice,X";
 
             var result = Csv.Deserialize<BasicModel>(Utf8(csv));
 
