@@ -238,7 +238,13 @@ namespace IntelOrca.Biohazard.BioRand.REE
                 }
                 return modifiers
                     .OrderBy(x => x.Item2)
-                    .Select(x => (Modifier)Activator.CreateInstance(x.Item1)!)
+                    .Select(x =>
+                    {
+                        var contextCtor = x.Item1.GetConstructor([typeof(IReeRandomizerContext)]);
+                        if (contextCtor != null)
+                            return (Modifier)contextCtor.Invoke([this]);
+                        return (Modifier)Activator.CreateInstance(x.Item1)!;
+                    })
                     .ToImmutableArray();
             }
 
