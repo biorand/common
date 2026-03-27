@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>1.5.2</Version>
+    <Version>1.5.3</Version>
     <Authors>Ted John</Authors>
     <Product>$(AssemblyName)</Product>
     <Copyright>Copyright (C) Ted John 2024-2026</Copyright>
