@@ -117,7 +117,7 @@ namespace IntelOrca.Biohazard.BioRand
             return Nullable.GetUnderlyingType(type) != null;
         }
 
-        private static object ToImmutableArray(Type elementType, IEnumerable<object> items)
+        private static object ToImmutableArray(Type elementType, IEnumerable<object?> items)
         {
             var castMethod = typeof(Enumerable)
                 .GetMethod(nameof(Enumerable.Cast))

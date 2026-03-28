@@ -98,10 +98,6 @@ C";
         [Fact]
         public void Deserialize_QuotedFields_WithComma_Works()
         {
-            var csv = @"Name
-""Alice, Smith""
-Bob";
-
             var result = Csv.Deserialize<BasicModel>(Utf8(@"Id,Name
 1,""Alice, Smith""
 2,Bob"));
@@ -113,11 +109,6 @@ Bob";
         [Fact]
         public void Deserialize_QuotedFields_WithEscapedQuotes_Works()
         {
-            var csv = @"
-Name
-""Alice """"The Great""""""
-Bob";
-
             var result = Csv.Deserialize<BasicModel>(Utf8(@"Id,Name
 1,""Alice """"The Great""""""
 2,Bob"));
