@@ -87,6 +87,27 @@ namespace IntelOrca.Biohazard.BioRand
 
             Type underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
 
+            if (underlyingType.IsArray)
+            {
+                Type elementType = underlyingType.GetElementType()!;
+                string[] source = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
+                var typedArray = Array.CreateInstance(elementType, source.Length);
+                for (var i = 0; i < source.Length; i++)
+                    typedArray.SetValue(ParseValue(source[i], elementType), i);
+                return typedArray;
+            }
+
+            if (underlyingType.IsGenericType &&
+                underlyingType.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                Type elementType = underlyingType.GenericTypeArguments[0];
+                string[] source = input.Split([' '], StringSplitOptions.RemoveEmptyEntries);
+                var list = (System.Collections.IList)Activator.CreateInstance(underlyingType)!;
+                foreach (var item in source)
+                    list.Add(ParseValue(item, elementType));
+                return list;
+            }
+
             if (underlyingType.IsGenericType &&
                 underlyingType.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
             {

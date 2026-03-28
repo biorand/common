@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
+using IntelOrca.Biohazard.BioRand;
 
 namespace IntelOrca.Biohazard.BioRand.Common.Tests
 {
@@ -37,5 +39,36 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         public Guid Id { get; set; }
     }
 
-    // TODO: Add more intricate models
+    public class FloatModel
+    {
+        public float FloatValue { get; set; }
+        public double DoubleValue { get; set; }
+    }
+
+    public class IntArrayModel
+    {
+        public int[] Numbers { get; set; } = [];
+    }
+
+    public class IntListModel
+    {
+        public List<int> Numbers { get; set; } = [];
+    }
+
+    public class ImmutableStringArrayModel
+    {
+        public ImmutableArray<string> Tags { get; set; }
+    }
+
+    public class ImmutableGuidArrayModel
+    {
+        public ImmutableArray<Guid> Ids { get; set; }
+    }
+
+    public class RowNumberModel
+    {
+        [RowNumber]
+        public int Row { get; set; }
+        public string Name { get; set; }
+    }
 }
