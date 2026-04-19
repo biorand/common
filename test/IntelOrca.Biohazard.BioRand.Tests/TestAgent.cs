@@ -9,11 +9,22 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         [Fact]
         public async Task Randomize()
         {
-            var host = "http://localhost:10285";
-            var apiKey = "ENTER-API-KEY-HERE";
+            var host = GetEnv("BIORAND_API_URL", "http://localhost:10285");
+            var apiKey = GetEnv("BIORAND_API_KEY", "");
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                Assert.Skip("API key is required to run this test.");
+            }
+
             var game = 1;
             using var agent = new RandomizerAgent(host, apiKey, game, new Handler());
-            await agent.RunAsync();
+            await agent.RunAsync(TestContext.Current.CancellationToken);
+        }
+
+        private static string GetEnv(string name, string defaultValue)
+        {
+            var value = Environment.GetEnvironmentVariable(name);
+            return string.IsNullOrEmpty(value) ? defaultValue : value;
         }
 
         private class Handler : IRandomizerAgentHandler

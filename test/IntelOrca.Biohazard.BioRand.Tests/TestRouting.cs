@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using IntelOrca.Biohazard.BioRand.Routing;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace IntelOrca.Biohazard.BioRand.Common.Tests
 {

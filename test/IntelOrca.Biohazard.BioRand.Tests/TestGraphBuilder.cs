@@ -139,7 +139,7 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
             builder.Door(room207, room202);
 
             var graph = builder.ToGraph();
-            var route = new RouteFinder().Find(graph);
+            var route = new RouteFinder().Find(graph, TestContext.Current.CancellationToken);
             Assert.Equal(7, route.ItemToKey.Count);
         }
 
