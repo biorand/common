@@ -83,23 +83,17 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 return state;
             }
 
-            // Only possible ways left consume a key, so lets detect we can
-            // do all of them
-            foreach (var way in possibleWays)
+            // Process one consumable edge at a time so that keys discovered
+            // behind opened doors can be used for subsequent doors.
+            if (possibleWays.Length > 0)
             {
-                if (!HasAllKeys(state, way))
-                    return null;
-
+                var way = possibleWays[0];
                 var consumeKeys = way.RequiredKeys
                     .Where(x => x.Kind == KeyKind.Consumable)
                     .ToArray();
                 state = state.UseKeys(consumeKeys);
-            }
-
-            // Now visit everything we unlocked
-            foreach (var way in possibleWays)
-            {
                 state = state.Visit(way);
+                return state;
             }
 
             return state;
@@ -149,7 +143,10 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 var newNodes = edgeNodes
                     .Where(x => !Visited.Contains(x))
                     .ToArray();
-                var newEdges = newNodes.SelectMany(x => Route.Graph.GetEdgesFrom(x));
+                var newVisited = Visited.Union(newNodes);
+                var newEdges = newNodes
+                    .SelectMany(x => Route.Graph.GetApplicableEdgesFrom(x))
+                    .Where(e => !newVisited.Contains(e.Source) || !newVisited.Contains(e.Destination));
                 var newKeys = newNodes
                     .Select(Route.GetItemContents)
                     .Where(x => x != null)
@@ -157,7 +154,7 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                     .ToArray();
                 return new State(
                     Route,
-                    Visited.Union(newNodes),
+                    newVisited,
                     Next.Except(edges).Union(newEdges),
                     Keys.AddRange(newKeys));
             }

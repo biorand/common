@@ -583,7 +583,7 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
                 var route = builder.GenerateRoute(i);
 
                 Assert.True(route.AllNodesVisited);
-                AssertKeyOnce(route, key1, item3a, item3b);
+                AssertKeyOnce(route, key1, item0a, item0b, item3a, item3b);
             }
         }
 
@@ -885,6 +885,73 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
 
                 var route = builder.GenerateRoute(i);
                 Assert.True(route.AllNodesVisited);
+            }
+        }
+
+        /// <summary>
+        /// Tests that the solver correctly handles TwoWay edges where a room
+        /// is the destination (not source). The solver must discover these
+        /// reverse-traversable edges, otherwise it misses rooms, items, and
+        /// keys causing false softlock detection for consumable keys.
+        /// </summary>
+        [Fact]
+        public void SolverHandlesReversedTwoWayEdges()
+        {
+            for (var i = 0; i < Retries; i++)
+            {
+                var builder = new GraphBuilder();
+                var key0 = builder.Key("K0", 1, KeyKind.Consumable);
+
+                var roomA = builder.Room("ROOM A");
+                var roomB = builder.Room("ROOM B");
+                var roomC = builder.Room("ROOM C");
+                var roomD = builder.Room("ROOM D");
+                var roomE = builder.Room("ROOM E");
+
+                var item1 = builder.Item("ITEM 1", 1, roomA);
+                var item2 = builder.Item("ITEM 2", 1, roomC);
+
+                builder.Door(roomA, roomB);           // A->B TwoWay
+                builder.Door(roomC, roomB);           // C->B TwoWay (B is dest, reversed)
+                builder.Door(roomB, roomD, key0);     // B->D requires K0
+                builder.Door(roomA, roomE, key0);     // A->E requires K0
+
+                var route = builder.GenerateRoute(i);
+                Assert.True(route.AllNodesVisited);
+                Assert.Equal(RouteSolverResult.Ok, route.Solve());
+            }
+        }
+
+        /// <summary>
+        /// Tests that the solver does not falsely report a softlock when
+        /// consumable keys are discovered sequentially behind locked doors.
+        /// E.g. opening door A reveals keys needed for door B.
+        /// </summary>
+        [Fact]
+        public void SolverHandlesSequentialConsumableKeys()
+        {
+            for (var i = 0; i < Retries; i++)
+            {
+                var builder = new GraphBuilder();
+                var coin = builder.Key("COIN", 1, KeyKind.Consumable);
+
+                var lobby = builder.Room("LOBBY");
+                var item0 = builder.Item("ITEM 0", 1, lobby);
+                var item1 = builder.Item("ITEM 1", 1, lobby);
+
+                // Door A needs 1 coin; behind it are 2 more coins
+                var roomA = builder.Room("ROOM A");
+                var itemA1 = builder.Item("ITEM A1", 1, roomA);
+                var itemA2 = builder.Item("ITEM A2", 1, roomA);
+                builder.Door(lobby, roomA, coin);
+
+                // Door B needs 2 coins; behind it is the goal
+                var roomB = builder.Room("ROOM B");
+                builder.Door(lobby, roomB, coin, coin);
+
+                var route = builder.GenerateRoute(i);
+                Assert.True(route.AllNodesVisited);
+                Assert.Equal(RouteSolverResult.Ok, route.Solve());
             }
         }
 
