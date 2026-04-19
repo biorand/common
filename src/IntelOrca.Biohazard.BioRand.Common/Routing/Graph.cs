@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using IntelOrca.Biohazard.BioRand.Graphing;
 
 namespace IntelOrca.Biohazard.BioRand.Routing
@@ -244,6 +246,71 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         public Route GenerateRoute(int? seed = null, RouteFinderOptions? options = null)
         {
             return new RouteFinder(seed, options).Find(this);
+        }
+
+        public string Serialize()
+        {
+            var dto = new GraphSerializationDto
+            {
+                Keys = Keys.Select(k => new KeyDto
+                {
+                    Id = k.Id,
+                    Group = k.Group,
+                    Kind = k.Kind,
+                    Label = k.Label
+                }).ToArray(),
+                Nodes = Nodes.Select(n => new NodeDto
+                {
+                    Id = n.Id,
+                    Group = n.Group,
+                    Kind = n.Kind,
+                    Label = n.Label
+                }).ToArray(),
+                Edges = Edges.Select(e => new EdgeDto
+                {
+                    Source = e.Source.Id,
+                    Destination = e.Destination.Id,
+                    Kind = e.Kind,
+                    Requires = e.Requires.Select(r => r.IsKey
+                        ? new RequirementDto { Kind = "Key", Id = r.Key!.Value.Id }
+                        : new RequirementDto { Kind = "Node", Id = r.Node!.Value.Id, Soft = r.IsSoft }
+                    ).ToArray()
+                }).ToArray()
+            };
+            return JsonSerializer.Serialize(dto, CreateJsonOptions());
+        }
+
+        public static Graph FromJson(string json)
+        {
+            var dto = JsonSerializer.Deserialize<GraphSerializationDto>(json, CreateJsonOptions())
+                ?? throw new InvalidOperationException("Failed to deserialize graph.");
+
+            var keys = dto.Keys.Select(k => new Key(k.Id, k.Group, k.Kind, k.Label)).ToImmutableArray();
+            var nodes = dto.Nodes.Select(n => new Node(n.Id, n.Group, n.Kind, n.Label)).ToImmutableArray();
+            var keyMap = keys.ToDictionary(k => k.Id);
+            var nodeMap = nodes.ToDictionary(n => n.Id);
+
+            var edges = dto.Edges.Select(e =>
+            {
+                var source = nodeMap[e.Source];
+                var destination = nodeMap[e.Destination];
+                var requires = e.Requires.Select(r =>
+                    r.Kind == "Key"
+                        ? new Requirement(keyMap[r.Id])
+                        : new Requirement(nodeMap[r.Id], r.Soft)
+                ).ToImmutableArray();
+                return new Edge(source, destination, requires, e.Kind);
+            }).ToImmutableArray();
+
+            return new Graph(keys, nodes, edges);
+        }
+
+        private static JsonSerializerOptions CreateJsonOptions()
+        {
+            return new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() }
+            };
         }
     }
 }
