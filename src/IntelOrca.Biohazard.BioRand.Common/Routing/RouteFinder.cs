@@ -107,7 +107,7 @@ namespace IntelOrca.Biohazard.BioRand.Routing
             // If we have left over locked edges, don't bother continuing to next sub graph
             if (state.Next.Count != 0)
             {
-                options.DebugDeadendCallback?.Invoke(state);
+                options.DebugDeadendCallback?.Invoke(CreateDeadEndInfo(state));
                 return state;
             }
 
@@ -492,6 +492,52 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         {
             var flags = RouteSolver.Default.Solve(GetRoute(state));
             return (flags & RouteSolverResult.PotentialSoftlock) == 0;
+        }
+
+        private static DeadEndInfo CreateDeadEndInfo(State state)
+        {
+            var stuckEdges = new List<DeadEndInfo.StuckEdge>();
+            var keyNeeds = new Dictionary<Key, (int edgeCount, int totalCopies)>();
+
+            foreach (var edge in state.Next)
+            {
+                var checklistItem = GetChecklistItem(state, edge);
+                var missingKeys = checklistItem.Need.ToArray();
+                stuckEdges.Add(new DeadEndInfo.StuckEdge(edge, missingKeys));
+
+                foreach (var g in missingKeys.GroupBy(k => k))
+                {
+                    if (keyNeeds.TryGetValue(g.Key, out var existing))
+                    {
+                        keyNeeds[g.Key] = (existing.edgeCount + 1, existing.totalCopies + g.Count());
+                    }
+                    else
+                    {
+                        keyNeeds[g.Key] = (1, g.Count());
+                    }
+                }
+            }
+
+            var allItems = state.Input.Nodes.Where(n => n.Kind == NodeKind.Item).ToArray();
+            var keyShortages = new List<DeadEndInfo.KeyShortage>();
+            foreach (var kvp in keyNeeds)
+            {
+                var key = kvp.Key;
+                var edgeCount = kvp.Value.edgeCount;
+                var totalCopies = kvp.Value.totalCopies;
+                // Reusable keys only need 1 placement to serve all edges
+                var copiesNeeded = key.Kind == KeyKind.Reusuable ? 1 : totalCopies;
+                var compatibleItemCount = allItems.Count(item => (item.Group & key.Group) == key.Group);
+                var spareCompatibleItemCount = state.SpareItems.Count(item => (item.Group & key.Group) == key.Group);
+                keyShortages.Add(new DeadEndInfo.KeyShortage(key, edgeCount, copiesNeeded, compatibleItemCount, spareCompatibleItemCount));
+            }
+
+            return new DeadEndInfo(
+                state.Visited.Count,
+                state.SpareItems.Count,
+                state.ItemToKey.Count,
+                stuckEdges,
+                keyShortages);
         }
 
         private sealed class ChecklistItem
