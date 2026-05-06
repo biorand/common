@@ -129,16 +129,7 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
             {
                 reporter.RunTask($"Writing {outputPath}", () =>
                 {
-                    using var zip = new ZipArchive(new MemoryStream(zipFile));
-                    foreach (var entry in zip.Entries)
-                    {
-                        if (!entry.FullName.StartsWith("natives/", StringComparison.OrdinalIgnoreCase))
-                            continue;
-
-                        var destinationPath = Path.Combine(outputPath, entry.FullName);
-                        Directory.CreateDirectory(Path.GetDirectoryName(destinationPath)!);
-                        entry.ExtractToFile(destinationPath, overwrite: true);
-                    }
+                    ExtractNatives(zipFile, outputPath);
                 });
             }
             return 0;
