@@ -5,7 +5,7 @@ using IntelOrca.Biohazard.BioRand.Extensions;
 
 namespace IntelOrca.Biohazard.BioRand
 {
-    internal class EndlessBag<T>
+    public class EndlessBag<T>
     {
         private readonly Rng _rng = new Rng();
         private readonly List<T> _allItems = new List<T>();
