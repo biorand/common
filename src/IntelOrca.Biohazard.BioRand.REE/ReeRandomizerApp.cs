@@ -57,10 +57,6 @@ namespace IntelOrca.Biohazard.BioRand.REE
                 .WithData(randomizerFactory)
                 .WithDescription("Create a mini pak containing all the required vanilla assets.")
                 .WithExample("setup", "-o", "custom.pak", "-i", ExampleInstallPath);
-            config.AddCommand<UpdateCommand>("update")
-                .WithData(randomizerFactory)
-                .WithDescription("Updates csv file(s).")
-                .WithExample("update");
             config.AddCommand<ModCommand>("mod")
                 .WithData(randomizerFactory)
                 .WithDescription("Export one or more standalone mods or combine them into a super mod. Run with no arguments to display available mods.")
