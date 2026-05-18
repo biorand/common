@@ -59,62 +59,86 @@ namespace IntelOrca.Biohazard.BioRand.REE
             RandomizerOutput? result = null;
             Progress.RunTask("Building mod", () =>
             {
-                var modBuilder = CreateModBuilder();
-                result = new RandomizerOutput(
-                    [
-                        new RandomizerOutputAsset(
-                            "1-patch",
-                            "Patch",
-                            "Simply drop this file into your install folder.",
-                            $"biorand-{Randomizer.GameMoniker}-{Input.Seed}.zip",
-                            BuildPakZip(modBuilder)),
-                        new RandomizerOutputAsset(
-                            "2-fluffy",
-                            "Fluffy Mod",
-                            "Drop this zip file into Fluffy Mod Manager's mod folder and enable it.",
-                            $"biorand-{Randomizer.GameMoniker}-{Input.Seed}-mod.zip",
-                            BuildFluffyZip(modBuilder))
-                    ],
-                    Instructions);
+                result = new RandomizerOutput(BuildAssets(), Instructions);
             });
             return result ?? throw new Exception("No mod was built");
+        }
+
+        protected virtual ImmutableArray<RandomizerOutputAsset> BuildAssets()
+        {
+            var results = ImmutableArray.CreateBuilder<RandomizerOutputAsset>();
+
+            var modBuilder = CreateModBuilder();
+            var pak = BuildPakZip(modBuilder);
+            if (pak != null && pak.Length != 0)
+            {
+                results.Add(new RandomizerOutputAsset(
+                    "1-patch",
+                    "Patch",
+                    "Simply drop this file into your install folder.",
+                    $"biorand-{Randomizer.GameMoniker}-{Input.Seed}.zip",
+                    pak));
+            }
+
+            var fluffy = BuildFluffyZip(modBuilder);
+            if (fluffy != null && fluffy.Length != 0)
+            {
+                results.Add(new RandomizerOutputAsset(
+                    "2-fluffy",
+                    "Fluffy Mod",
+                    "Drop this zip file into Fluffy Mod Manager's mod folder and enable it.",
+                    $"biorand-{Randomizer.GameMoniker}-{Input.Seed}-mod.zip",
+                    fluffy));
+            }
+
+            return results.ToImmutable();
         }
 
         protected virtual string Instructions => "";
 
         private ModBuilder CreateModBuilder()
         {
-            // var output = new ChainsawRandomizerOutput(input, _fileRepository.GetOutputPakFile(), _logFiles, PakVersion);
-            var builder = new ModBuilder();
-            builder.Name = $"BioRand - {Input.ProfileName} [{Input.Seed}]";
-            builder.Description = $"{Input.ProfileName} by {Input.ProfileAuthor} [{Input.Seed}]\n{Input.ProfileDescription}";
-            builder.Author = $"BioRand by {Randomizer.Author}";
-            builder.Version = Randomizer.Version;
+            var builder = new ModBuilder
+            {
+                Name = $"BioRand - {Input.ProfileName} [{Input.Seed}]",
+                Description = $"{Input.ProfileName} by {Input.ProfileAuthor} [{Input.Seed}]\n{Input.ProfileDescription}",
+                Author = $"BioRand by {Randomizer.Author}",
+                Version = Randomizer.Version
+            };
             FileRepository.AddFilesToModBuilder(builder);
             OnBuildMod(builder);
             return builder;
         }
 
-        private byte[] BuildPakZip(ModBuilder modBuilder)
+        protected virtual byte[]? BuildPakZip(ModBuilder modBuilder)
         {
             var zipFileBuilder = new ZipFileBuilder();
             zipFileBuilder.AddEntry(PakName, modBuilder.BuildPakFile());
-            zipFileBuilder.AddEntry("config.json", Encoding.UTF8.GetBytes(Input.Configuration.ToJson()));
-            foreach (var logFile in _logFiles)
+            foreach (var f in GetAdditionalFiles())
             {
-                zipFileBuilder.AddEntry(logFile.Key, Encoding.UTF8.GetBytes(logFile.Value));
+                zipFileBuilder.AddEntry(f.Key, f.Value);
             }
             return zipFileBuilder.Build();
         }
 
-        private byte[] BuildFluffyZip(ModBuilder modBuilder)
+        protected virtual byte[]? BuildFluffyZip(ModBuilder modBuilder)
         {
-            modBuilder.AddFile("config.json", Encoding.UTF8.GetBytes(Input.Configuration.ToJson()));
-            foreach (var logFile in _logFiles)
+            foreach (var f in GetAdditionalFiles())
             {
-                modBuilder.AddFile(logFile.Key, Encoding.UTF8.GetBytes(logFile.Value));
+                modBuilder.AddFile(f.Key, f.Value);
             }
             return modBuilder.BuildFluffyZipFile();
+        }
+
+        protected virtual ImmutableDictionary<string, byte[]> GetAdditionalFiles()
+        {
+            var result = ImmutableDictionary.CreateBuilder<string, byte[]>();
+            result["config.json"] = Encoding.UTF8.GetBytes(Input.Configuration.ToJson());
+            foreach (var logFile in _logFiles)
+            {
+                result[logFile.Key] = Encoding.UTF8.GetBytes(logFile.Value);
+            }
+            return result.ToImmutable();
         }
 
         protected virtual void OnBuildMod(ModBuilder builder) { }
