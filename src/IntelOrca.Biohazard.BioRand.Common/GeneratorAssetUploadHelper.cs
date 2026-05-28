@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IntelOrca.Biohazard.BioRand
 {
-    public sealed class GeneratorAssetUploadHelper
+    internal sealed class GeneratorAssetUploadHelper
     {
         private readonly HttpClient _httpClient;
         private readonly string _baseUri;

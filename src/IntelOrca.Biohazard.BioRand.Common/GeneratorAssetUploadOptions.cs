@@ -2,7 +2,7 @@ using System;
 
 namespace IntelOrca.Biohazard.BioRand
 {
-    public sealed class GeneratorAssetUploadOptions
+    internal sealed class GeneratorAssetUploadOptions
     {
         public const int DefaultSmallAssetThresholdBytes = 32 * 1024 * 1024;
         public const int DefaultChunkSizeBytes = 8 * 1024 * 1024;
