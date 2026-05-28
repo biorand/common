@@ -41,6 +41,9 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
 
             [CommandOption("-k|--kill")]
             public bool Kill { get; init; }
+
+            [CommandOption("-b|--beta")]
+            public bool Beta { get; init; }
         }
 
         public override ValidationResult Validate(CommandContext context, Settings settings)
@@ -84,7 +87,8 @@ namespace IntelOrca.Biohazard.BioRand.REE.Commands
             AnsiConsole.MarkupLine($"Generating seed {input.Seed}...");
             var gennerator = await randomizer.CreateGeneratorAsync(input, new RandomizerOptions()
             {
-                GameInputPath = settings.InputPath ?? ""
+                GameInputPath = settings.InputPath ?? "",
+                Beta = settings.Beta
             }, reporter);
             var output = await gennerator.GenerateAsync();
 
