@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -20,6 +19,7 @@ namespace IntelOrca.Biohazard.BioRand
         private static readonly JsonSerializerOptions _options;
 
         private readonly HttpClient _httpClient = new();
+        private readonly GeneratorAssetUploadHelper _assetUploadHelper;
         private readonly IRandomizerAgentHandler _handler;
         private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1);
         private DateTime _lastHeartbeatTime;
@@ -54,6 +54,7 @@ namespace IntelOrca.Biohazard.BioRand
             _handler = handler;
 
             _httpClient.DefaultRequestHeaders.Add("X-API-KEY", ApiKey);
+            _assetUploadHelper = new GeneratorAssetUploadHelper(_httpClient, baseUri, _options);
         }
 
         public void Dispose() => DisposeAsync().AsTask().Wait();
@@ -312,16 +313,7 @@ namespace IntelOrca.Biohazard.BioRand
                 {
                     foreach (var asset in output.Assets)
                     {
-                        await PostFormAsync<object>("generator/asset", new Dictionary<string, object>
-                        {
-                            ["id"] = Id,
-                            ["randoId"] = q.Id,
-                            ["key"] = asset.Key,
-                            ["title"] = asset.Title,
-                            ["description"] = asset.Description,
-                            ["data"] = asset.Data,
-                            ["data.filename"] = asset.FileName
-                        });
+                        await _assetUploadHelper.UploadAsync(Id, q.Id, asset);
                     }
                     await PostAsync<object>("generator/end", new
                     {
@@ -358,33 +350,6 @@ namespace IntelOrca.Biohazard.BioRand
             var response = await _httpClient.SendAsync(request);
             if (!response.IsSuccessStatusCode)
                 throw new HttpException(response.StatusCode);
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-            if (responseContent.Length == 0)
-                return null!;
-
-            return JsonSerializer.Deserialize<T>(responseContent, _options)!;
-        }
-
-        private async Task<T> PostFormAsync<T>(string path, Dictionary<string, object> formData) where T : class
-        {
-            var url = GetUri(path);
-            using var form = new MultipartFormDataContent();
-            foreach (var kvp in formData)
-            {
-                if (kvp.Value is byte[] b)
-                {
-                    form.Add(new ByteArrayContent(b), kvp.Key, (string)formData[$"{kvp.Key}.filename"]);
-                }
-                else
-                {
-                    form.Add(new StringContent(kvp.Value.ToString() ?? ""), kvp.Key);
-                }
-            }
-
-            var response = await _httpClient.PostAsync(url, form);
-            if (!response.IsSuccessStatusCode)
-                throw new Exception($"{response.StatusCode} returned");
 
             var responseContent = await response.Content.ReadAsStringAsync();
             if (responseContent.Length == 0)
