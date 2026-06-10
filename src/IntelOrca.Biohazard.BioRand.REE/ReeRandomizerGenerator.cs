@@ -59,7 +59,7 @@ namespace IntelOrca.Biohazard.BioRand.REE
             RandomizerOutput? result = null;
             Progress.RunTask("Building mod", () =>
             {
-                result = new RandomizerOutput(BuildAssets(), Instructions);
+                result = new RandomizerOutput(BuildAssets(), Instructions, RequiredUserTags);
             });
             return result ?? throw new Exception("No mod was built");
         }
@@ -95,6 +95,7 @@ namespace IntelOrca.Biohazard.BioRand.REE
         }
 
         protected virtual string Instructions => "";
+        protected virtual string RequiredUserTags => "";
 
         private ModBuilder CreateModBuilder()
         {

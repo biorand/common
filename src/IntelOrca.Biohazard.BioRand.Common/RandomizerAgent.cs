@@ -319,7 +319,8 @@ namespace IntelOrca.Biohazard.BioRand
                     {
                         Id,
                         RandoId = q.Id,
-                        output.Instructions
+                        output.Instructions,
+                        output.RequiredUserTags
                     });
                     _handler.LogInfo($"Uploaded rando {q.Id}");
                 }

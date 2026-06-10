@@ -2,11 +2,27 @@
 
 namespace IntelOrca.Biohazard.BioRand
 {
-    public class RandomizerOutput(
-        ImmutableArray<RandomizerOutputAsset> assets,
-        string instructions)
+    public class RandomizerOutput
     {
-        public ImmutableArray<RandomizerOutputAsset> Assets => assets;
-        public string Instructions => instructions;
+        public ImmutableArray<RandomizerOutputAsset> Assets { get; }
+        public string Instructions { get; }
+        public string RequiredUserTags { get; }
+
+        public RandomizerOutput(
+            ImmutableArray<RandomizerOutputAsset> assets,
+            string instructions)
+            : this(assets, instructions, "")
+        {
+        }
+
+        public RandomizerOutput(
+            ImmutableArray<RandomizerOutputAsset> assets,
+            string instructions,
+            string requiredUserTags)
+        {
+            Assets = assets;
+            Instructions = instructions;
+            RequiredUserTags = requiredUserTags;
+        }
     }
 }
