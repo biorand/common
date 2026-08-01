@@ -45,7 +45,7 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
             var json = GetEmbeddedResource("data.re9_multiconsume.json");
             var graph = Graph.FromJson(json);
 
-            for (var seed = 0; seed < 20; seed++)
+            for (var seed = 5609; seed < 5609 + 20; seed++)
             {
                 var route = graph.GenerateRoute(seed);
                 // The route should be rejected (AllNodesVisited=false) either

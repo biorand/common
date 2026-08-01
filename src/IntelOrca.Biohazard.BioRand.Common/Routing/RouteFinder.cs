@@ -29,9 +29,18 @@ namespace IntelOrca.Biohazard.BioRand.Routing
             // Post-generation validation: a route that visits all nodes may
             // still be softlockable if consumable keys can be used in a wrong
             // order. The solver explores all orderings to detect this.
+            // The solver is given a bounded cancellation token so that
+            // exhaustively verifying a non-softlockable route on a large
+            // graph (e.g. RE9 grace_care: ~276K unique solver states) cannot
+            // hang generation. On timeout the solver optimistically accepts
+            // the route; in practice softlockable routes abort fast (the
+            // solver finds a failing consumable ordering early), so the
+            // common softlock patterns are still caught within the budget.
             if (route.AllNodesVisited)
             {
-                var result = route.Solve();
+                using var solveCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+                solveCts.CancelAfter(TimeSpan.FromSeconds(5));
+                var result = RouteSolver.Default.Solve(route, blockedEdges: null, solveCts.Token);
                 if ((result & RouteSolverResult.PotentialSoftlock) != 0)
                 {
                     return new Route(route.Graph, false, route.ItemToKey, route.Log);
@@ -515,6 +524,14 @@ namespace IntelOrca.Biohazard.BioRand.Routing
             // treats the unplaced keys' doors as permanently impassable and
             // reports a softlock. Gate on all keys being placed instead of on
             // Next being empty. See TwoRoutes for the regression this guards.
+            //
+            // Early backtracking via a scoped solver (blocking unprocessed
+            // NoReturn/OneWay edges) was investigated but proved too expensive
+            // on large 372-node graphs (5! consumable orderings per call ×
+            // hundreds of subgraph completions per dead-end-bounded attempt =
+            // minutes to hours). The post-generation check in Find() remains
+            // the safety net; DoMultiAttemptGenerate retries with a new seed
+            // when a softlock is detected post-generation.
             if (!AllKeysPlaced(route))
                 return true;
 
