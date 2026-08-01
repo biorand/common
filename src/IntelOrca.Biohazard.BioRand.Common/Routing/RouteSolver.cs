@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using IntelOrca.Biohazard.BioRand.Collections;
@@ -16,20 +17,33 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         public RouteSolverResult Solve(Route route)
         {
             var state = Begin(route);
-            return TrySolve(state)
+            var cache = new Dictionary<string, bool>();
+            return TrySolve(state, cache)
                 ? RouteSolverResult.Ok
                 : RouteSolverResult.PotentialSoftlock | RouteSolverResult.NodesRemaining;
         }
 
         /// <summary>
         /// Recursively tries all orderings of consumable key usage.
-        /// Returns true if a path exists that visits all reachable nodes
-        /// without getting stuck.
+        /// Returns true only if ALL orderings lead to every reachable node
+        /// being visited. This is universal (strict) semantics: if the player
+        /// could pick a wrong ordering and get stuck, the route is softlockable.
         /// </summary>
-        private static bool TrySolve(State state)
+        private static bool TrySolve(State state, Dictionary<string, bool> cache)
         {
             state = Expand(state);
 
+            var key = GetStateKey(state);
+            if (cache.TryGetValue(key, out var cached))
+                return cached;
+
+            var result = TrySolveCore(state, cache);
+            cache[key] = result;
+            return result;
+        }
+
+        private static bool TrySolveCore(State state, Dictionary<string, bool> cache)
+        {
             var possibleWays = state.Next
                 .Where(x => HasAllKeys(state, x))
                 .ToArray();
@@ -46,7 +60,7 @@ namespace IntelOrca.Biohazard.BioRand.Routing
 
                 // After visiting safe edges we may have revealed new rooms
                 // with new edges. Recurse to process them.
-                return TrySolve(state);
+                return TrySolve(state, cache);
             }
 
             // Only consumable-key edges remain
@@ -60,9 +74,9 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 return state.Next.Count == 0;
             }
 
-            // Try each consumable edge. If ANY ordering leads to all nodes
-            // visited, the route is solvable (no guaranteed softlock).
-            // Only report potential softlock when ALL orderings fail.
+            // Try each consumable edge. ALL orderings must succeed — if the
+            // player could pick a wrong door first and get stuck, the route
+            // is softlockable. Any failed ordering means potential softlock.
             foreach (var way in consumableWays)
             {
                 var newState = state;
@@ -72,11 +86,11 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 newState = newState.UseKeys(consumeKeys);
                 newState = newState.Visit(way);
 
-                if (TrySolve(newState))
-                    return true;
+                if (!TrySolve(newState, cache))
+                    return false;
             }
 
-            return false;
+            return true;
         }
 
         private static State Begin(Route route)
@@ -86,6 +100,21 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 [route.Graph.Start],
                 ImmutableHashSet.CreateRange(route.Graph.GetApplicableEdgesFrom(route.Graph.Start)),
                 ImmutableMultiSet<Key>.Empty);
+        }
+
+        private static string GetStateKey(State state)
+        {
+            var visited = string.Join(",", state.Visited
+                .Select(n => n.Id)
+                .OrderBy(x => x));
+            var keys = string.Join(",", state.Keys
+                .GroupBy(k => k)
+                .OrderBy(g => g.Key.Id)
+                .Select(g => $"{g.Key.Id}:{g.Count()}"));
+            var next = string.Join(",", state.Next
+                .OrderBy(e => e)
+                .Select(e => $"{e.Source.Id}->{e.Destination.Id}:{e.Kind}"));
+            return $"{visited}|{keys}|{next}";
         }
 
         private static State Expand(State state)

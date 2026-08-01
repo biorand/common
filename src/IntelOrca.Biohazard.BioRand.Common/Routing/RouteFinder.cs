@@ -24,7 +24,21 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         {
             var state = new State(input);
             state = DoSubgraph(_options, state, input.Start, _rng, false, 0, ct);
-            return GetRoute(state);
+            var route = GetRoute(state);
+
+            // Post-generation validation: a route that visits all nodes may
+            // still be softlockable if consumable keys can be used in a wrong
+            // order. The solver explores all orderings to detect this.
+            if (route.AllNodesVisited)
+            {
+                var result = route.Solve();
+                if ((result & RouteSolverResult.PotentialSoftlock) != 0)
+                {
+                    return new Route(route.Graph, false, route.ItemToKey, route.Log);
+                }
+            }
+
+            return route;
         }
 
         private static Route GetRoute(State state)

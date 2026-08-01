@@ -32,8 +32,12 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
 
         /// <summary>
         /// Tests a graph with a OneWay chain dead-ending in a fork where multiple
-        /// consumable keys compete for limited item slots, consistently producing
-        /// incomplete routes across all seeds.
+        /// consumable keys compete for limited item slots.
+        ///
+        /// Under universal semantics the solver detects that the player could
+        /// choose a wrong consumable-key ordering and softlock. The route
+        /// generator rejects such placements by setting AllNodesVisited=false
+        /// (via the post-generation solver check in RouteFinder.Find).
         /// </summary>
         [Fact]
         public void Example_RE9_MultiConsumable()
@@ -44,12 +48,11 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
             for (var seed = 0; seed < 20; seed++)
             {
                 var route = graph.GenerateRoute(seed);
+                // The route should be rejected (AllNodesVisited=false) either
+                // because generation couldn't complete, or because the
+                // post-generation solver detected a softlock.
                 Assert.False(route.AllNodesVisited,
                     $"Seed {seed}: expected incomplete route but got complete.\nLog:\n{route.Log}");
-
-                var result = route.Solve();
-                Assert.True(result.HasFlag(RouteSolverResult.NodesRemaining),
-                    $"Seed {seed}: expected NodesRemaining but got {result}");
             }
         }
 

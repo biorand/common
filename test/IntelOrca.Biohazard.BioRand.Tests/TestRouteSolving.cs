@@ -1,3 +1,4 @@
+using IntelOrca.Biohazard.BioRand.Collections;
 using IntelOrca.Biohazard.BioRand.Routing;
 using Xunit;
 
@@ -83,55 +84,63 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
         }
 
         /// <summary>
-        /// Tests that the solver finds a valid ordering even when the first
-        /// edge in sorted order would lead to a dead end.
-        ///
-        /// Graph: Start has 1 COIN. Door A (dest id=4) needs 1 COIN and
-        /// leads nowhere. Door B (dest id=5) needs 1 COIN and leads to KEY.
-        /// Door C needs KEY and leads to the goal.
-        ///
-        /// The old solver would pick Door A first (lower dest ID) and dead-end.
-        /// The fixed solver tries all orderings and finds the working path
-        /// through Door B.
-        /// </summary>
-        [Fact]
-        public void ExploresAllConsumableOrderings()
-        {
-            for (var i = 0; i < Retries; i++)
-            {
-                var builder = new GraphBuilder();
-                var coin = builder.Key("COIN", 1, KeyKind.Consumable);
-                var key = builder.Key("KEY", 1, KeyKind.Reusuable);
+                /// Tests that the solver uses universal (strict) semantics for
+                /// consumable-key orderings: if ANY ordering could softlock the
+                /// player, the solver must report PotentialSoftlock even though a
+                /// valid ordering also exists.
+                ///
+                /// Graph: Start has 1 COIN. Door A (1 coin) dead-ends. Door B
+                /// (1 coin) leads to a coin refill AND a reusable KEY. Door C
+                /// needs KEY and leads to the goal.
+                ///
+                /// The B-first ordering visits every node (open B, get coin+key,
+                /// open C, then open A). The A-first ordering wastes the coin on
+                /// a dead-end, leaving the player unable to open B.
+                ///
+                /// Under existential semantics the solver returns Ok (B works).
+                /// Under universal semantics it returns PotentialSoftlock (A fails).
+                /// </summary>
+                [Fact]
+                public void ExploresAllConsumableOrderings()
+                {
+                    var builder = new GraphBuilder();
+                    var coin = builder.Key("COIN", 1, KeyKind.Consumable);
+                    var key = builder.Key("KEY", 1, KeyKind.Reusuable);
 
-                var start = builder.Room("START");
-                var startItem = builder.Item("COIN", 1, start);
+                    var start = builder.Room("START");
+                    var startItem = builder.Item("COIN", 1, start);
 
-                // Door A: dead-end path (created first, gets lower dest ID)
-                var roomA = builder.Room("ROOM A");
-                builder.BlockedDoor(start, roomA, coin);
+                    // Door A: dead-end — wastes the coin with no progress
+                    var roomA = builder.Room("ROOM A");
+                    builder.BlockedDoor(start, roomA, coin);
 
-                // Door B: correct path (created second, higher dest ID)
-                var roomB = builder.Room("ROOM B");
-                var keyItem = builder.Item("KEY ITEM", 1, roomB);
-                builder.BlockedDoor(start, roomB, coin);
+                    // Door B: behind it are a coin refill and the reusable KEY
+                    var roomB = builder.Room("ROOM B");
+                    var coinBItem = builder.Item("COIN B", 1, roomB);
+                    var keyItem = builder.Item("KEY ITEM", 1, roomB);
+                    builder.BlockedDoor(start, roomB, coin);
 
-                // Door C: goal behind KEY
-                var roomC = builder.Room("ROOM C");
-                builder.BlockedDoor(roomB, roomC, key);
+                    // Door C: goal behind the reusable KEY
+                    var roomC = builder.Room("ROOM C");
+                    builder.BlockedDoor(roomB, roomC, key);
 
-                var route = builder.GenerateRoute(i);
-                _output.WriteLine(route.Log);
+                    var graph = builder.ToGraph();
 
-                if (!route.AllNodesVisited)
-                    continue;
+                    // Manually place keys: COIN at start, COIN refill in B, KEY in B
+                    var itemToKey = ImmutableOneToManyDictionary<Node, Key>.Empty
+                        .Add(startItem, coin)
+                        .Add(coinBItem, coin)
+                        .Add(keyItem, key);
 
-                // The solver must find the working ordering (B first, then C)
-                var result = route.Solve();
-                _output.WriteLine($"Solver result: {result}");
-                Assert.True(result == RouteSolverResult.Ok,
-                    $"Seed {i}: Solver should have found the valid ordering " +
-                    $"but returned {result}");
-            }
-        }
+                    var route = new Route(graph, true, itemToKey, "");
+
+                    var result = route.Solve();
+
+                    // Universal semantics: the player could waste the coin on Door A
+                    // and softlock, so PotentialSoftlock must be flagged even though
+                    // a valid ordering (B first) exists.
+                    Assert.True(result.HasFlag(RouteSolverResult.PotentialSoftlock),
+                        $"Solver should have detected potential softlock but returned {result}");
+                }
     }
 }
