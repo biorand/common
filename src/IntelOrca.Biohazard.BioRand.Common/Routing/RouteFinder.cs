@@ -490,8 +490,32 @@ namespace IntelOrca.Biohazard.BioRand.Routing
 
         private static bool ValidateState(State state)
         {
-            var flags = RouteSolver.Default.Solve(GetRoute(state));
+            var route = GetRoute(state);
+            // The solver can only meaningfully validate a route once every
+            // key in the graph has been placed on an item. NoReturn subgraphs
+            // are processed one at a time with a fresh state (Clear resets
+            // Visited/Next/OneWay), so a completed subgraph has Next empty
+            // (route.AllNodesVisited == true) even while keys for other,
+            // not-yet-processed subgraphs are still unplaced. Running the
+            // solver on such a partial route produces false positives: it
+            // treats the unplaced keys' doors as permanently impassable and
+            // reports a softlock. Gate on all keys being placed instead of on
+            // Next being empty. See TwoRoutes for the regression this guards.
+            if (!AllKeysPlaced(route))
+                return true;
+
+            var flags = RouteSolver.Default.Solve(route);
             return (flags & RouteSolverResult.PotentialSoftlock) == 0;
+        }
+
+        private static bool AllKeysPlaced(Route route)
+        {
+            foreach (var key in route.Graph.Keys)
+            {
+                if (route.ItemToKey.GetKeysContainingValue(key).Count == 0)
+                    return false;
+            }
+            return true;
         }
 
         private static DeadEndInfo CreateDeadEndInfo(State state)

@@ -1,0 +1,3431 @@
+{
+    "Keys": [
+        {
+            "Id": 3,
+            "Group": 1,
+            "Kind": "Reusuable",
+            "Label": "bsaa_container_key"
+        },
+        {
+            "Id": 10,
+            "Group": 1,
+            "Kind": "Reusuable",
+            "Label": "cedarbrook_apartments_key"
+        },
+        {
+            "Id": 14,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "broken_signal_receiver"
+        },
+        {
+            "Id": 15,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "distributor"
+        },
+        {
+            "Id": 16,
+            "Group": 4,
+            "Kind": "Consumable",
+            "Label": "relay"
+        },
+        {
+            "Id": 17,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "repair_kit"
+        },
+        {
+            "Id": 27,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "moon_quartz"
+        },
+        {
+            "Id": 28,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "star_quartz"
+        },
+        {
+            "Id": 29,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "sun_quartz"
+        },
+        {
+            "Id": 32,
+            "Group": 1,
+            "Kind": "Reusuable",
+            "Label": "old_key"
+        },
+        {
+            "Id": 43,
+            "Group": 1,
+            "Kind": "Reusuable",
+            "Label": "rusty_crank"
+        },
+        {
+            "Id": 46,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "mechanic_jack"
+        },
+        {
+            "Id": 50,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "battery"
+        },
+        {
+            "Id": 53,
+            "Group": 1,
+            "Kind": "Reusuable",
+            "Label": "bolt_cutters"
+        },
+        {
+            "Id": 59,
+            "Group": 8,
+            "Kind": "Reusuable",
+            "Label": "gas_can_with_fuel"
+        },
+        {
+            "Id": 64,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "locker_key"
+        },
+        {
+            "Id": 75,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "gas_can"
+        },
+        {
+            "Id": 97,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "valve_handwheel"
+        },
+        {
+            "Id": 99,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "red_jewel"
+        },
+        {
+            "Id": 105,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "animus_orb"
+        },
+        {
+            "Id": 106,
+            "Group": 1,
+            "Kind": "Consumable",
+            "Label": "noblesse_orb"
+        }
+    ],
+    "Nodes": [
+        {
+            "Id": 1,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.start"
+        },
+        {
+            "Id": 2,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.start.container"
+        },
+        {
+            "Id": 4,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.applegatehotel"
+        },
+        {
+            "Id": 5,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.ridgewoodstation.north"
+        },
+        {
+            "Id": 6,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.nfbuilding.1f"
+        },
+        {
+            "Id": 7,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.ridgewoodstation.south"
+        },
+        {
+            "Id": 8,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.nfbuilding.2f"
+        },
+        {
+            "Id": 9,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.hubstreet"
+        },
+        {
+            "Id": 11,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.nfbuilding.3f"
+        },
+        {
+            "Id": 12,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.centralcamp"
+        },
+        {
+            "Id": 13,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "ch4.20.end"
+        },
+        {
+            "Id": 18,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.sewer"
+        },
+        {
+            "Id": 19,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.centralcamp.container"
+        },
+        {
+            "Id": 20,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.1f"
+        },
+        {
+            "Id": 21,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.3f"
+        },
+        {
+            "Id": 22,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.centralcampside"
+        },
+        {
+            "Id": 23,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "ch4.40.start"
+        },
+        {
+            "Id": 24,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.south"
+        },
+        {
+            "Id": 25,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.2f"
+        },
+        {
+            "Id": 26,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.1f.office"
+        },
+        {
+            "Id": 30,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.2f.join.d"
+        },
+        {
+            "Id": 31,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark"
+        },
+        {
+            "Id": 33,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.1f"
+        },
+        {
+            "Id": 34,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.hall"
+        },
+        {
+            "Id": 35,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.save"
+        },
+        {
+            "Id": 36,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.crane"
+        },
+        {
+            "Id": 37,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.2f.join.a"
+        },
+        {
+            "Id": 38,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.2f.join.c"
+        },
+        {
+            "Id": 39,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.lockers"
+        },
+        {
+            "Id": 40,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.exit"
+        },
+        {
+            "Id": 41,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.mainstreet"
+        },
+        {
+            "Id": 42,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.3f"
+        },
+        {
+            "Id": 44,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.westoffice"
+        },
+        {
+            "Id": 45,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.eastcorridor"
+        },
+        {
+            "Id": 47,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone"
+        },
+        {
+            "Id": 48,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.2f.join.b"
+        },
+        {
+            "Id": 49,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.tank"
+        },
+        {
+            "Id": 51,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.flood"
+        },
+        {
+            "Id": 52,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.connector"
+        },
+        {
+            "Id": 54,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.flood.office"
+        },
+        {
+            "Id": 55,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.escape"
+        },
+        {
+            "Id": 56,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.mainstreet.container"
+        },
+        {
+            "Id": 57,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla.entrance"
+        },
+        {
+            "Id": 58,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.buildingsite"
+        },
+        {
+            "Id": 60,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla"
+        },
+        {
+            "Id": 61,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.2f"
+        },
+        {
+            "Id": 62,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.roof"
+        },
+        {
+            "Id": 63,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.westoffice.locker"
+        },
+        {
+            "Id": 65,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.westcorridor"
+        },
+        {
+            "Id": 66,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.backstreet"
+        },
+        {
+            "Id": 67,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.willistower"
+        },
+        {
+            "Id": 68,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.building.entrance"
+        },
+        {
+            "Id": 69,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.warehouse.zipwire"
+        },
+        {
+            "Id": 70,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.join"
+        },
+        {
+            "Id": 71,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.carpark.join.exit"
+        },
+        {
+            "Id": 72,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.buildingsite.sewer"
+        },
+        {
+            "Id": 73,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla.exit"
+        },
+        {
+            "Id": 74,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla.frenzy"
+        },
+        {
+            "Id": 76,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla.shed"
+        },
+        {
+            "Id": 77,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.roof.building1"
+        },
+        {
+            "Id": 78,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.cedarbrook.roof.building2"
+        },
+        {
+            "Id": 79,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.operationsconnector"
+        },
+        {
+            "Id": 80,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.reception"
+        },
+        {
+            "Id": 81,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.basement"
+        },
+        {
+            "Id": 82,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "kendo"
+        },
+        {
+            "Id": 83,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.building.exit"
+        },
+        {
+            "Id": 84,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.sewage.entrance"
+        },
+        {
+            "Id": 85,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.ridgewoodstation.east"
+        },
+        {
+            "Id": 86,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.stagla.canfill"
+        },
+        {
+            "Id": 87,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.1f.operations"
+        },
+        {
+            "Id": 88,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.lounge"
+        },
+        {
+            "Id": 89,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "kendo.shed"
+        },
+        {
+            "Id": 90,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.grimstone.high"
+        },
+        {
+            "Id": 91,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.sewage.pit"
+        },
+        {
+            "Id": 92,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.sewage.office"
+        },
+        {
+            "Id": 93,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.starscorridor"
+        },
+        {
+            "Id": 94,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.library"
+        },
+        {
+            "Id": 95,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "basketball"
+        },
+        {
+            "Id": 96,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "city.sewage.stairs"
+        },
+        {
+            "Id": 98,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.stars"
+        },
+        {
+            "Id": 100,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.hall"
+        },
+        {
+            "Id": 101,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "basketball.arena"
+        },
+        {
+            "Id": 102,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "orphanage.courtyard"
+        },
+        {
+            "Id": 103,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "rpd.2f.stars.case"
+        },
+        {
+            "Id": 104,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "orphanage"
+        },
+        {
+            "Id": 107,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "ch4.40.end"
+        },
+        {
+            "Id": 108,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "ch4.50.start"
+        },
+        {
+            "Id": 109,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "orphanage.sewer.start"
+        },
+        {
+            "Id": 110,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "orphanage.sewer.end"
+        },
+        {
+            "Id": 111,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "blackthorn"
+        },
+        {
+            "Id": 112,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "plants"
+        },
+        {
+            "Id": 113,
+            "Group": 0,
+            "Kind": "Default",
+            "Label": "ch4.50.end"
+        },
+        {
+            "Id": 114,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "container"
+        },
+        {
+            "Id": 115,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "globe"
+        },
+        {
+            "Id": 116,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "behind reception"
+        },
+        {
+            "Id": 117,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "floor"
+        },
+        {
+            "Id": 118,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "van"
+        },
+        {
+            "Id": 119,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "car near bus"
+        },
+        {
+            "Id": 120,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "van"
+        },
+        {
+            "Id": 121,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "supply box"
+        },
+        {
+            "Id": 122,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "supply box"
+        },
+        {
+            "Id": 123,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "repair kit"
+        },
+        {
+            "Id": 124,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "spear"
+        },
+        {
+            "Id": 125,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 126,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 127,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "locker"
+        },
+        {
+            "Id": 128,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "suitcase"
+        },
+        {
+            "Id": 129,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "key"
+        },
+        {
+            "Id": 130,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 131,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 132,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "distributor"
+        },
+        {
+            "Id": 133,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "grenade ladder"
+        },
+        {
+            "Id": 134,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case up ladder"
+        },
+        {
+            "Id": 135,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "locker"
+        },
+        {
+            "Id": 136,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 137,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 138,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "body"
+        },
+        {
+            "Id": 139,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "bsaa container key"
+        },
+        {
+            "Id": 140,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 141,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "body"
+        },
+        {
+            "Id": 142,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 143,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 144,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 145,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 146,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 147,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "car boot"
+        },
+        {
+            "Id": 148,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 149,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "truck ne"
+        },
+        {
+            "Id": 150,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "truck sw"
+        },
+        {
+            "Id": 151,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "shotgun shells"
+        },
+        {
+            "Id": 152,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 153,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 154,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 155,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 156,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "truck ne"
+        },
+        {
+            "Id": 157,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 158,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "battery"
+        },
+        {
+            "Id": 159,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 160,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 161,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 162,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 163,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 164,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 165,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "valve handle"
+        },
+        {
+            "Id": 166,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "spear"
+        },
+        {
+            "Id": 167,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 168,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "ememy drop"
+        },
+        {
+            "Id": 169,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "battery"
+        },
+        {
+            "Id": 170,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 171,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 172,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 173,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 174,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 175,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "crank"
+        },
+        {
+            "Id": 176,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 177,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 178,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 179,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scrap"
+        },
+        {
+            "Id": 180,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 181,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 182,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "truck"
+        },
+        {
+            "Id": 183,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 184,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "locker"
+        },
+        {
+            "Id": 185,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scrap"
+        },
+        {
+            "Id": 186,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 187,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 188,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "gas can"
+        },
+        {
+            "Id": 189,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "enemy drop"
+        },
+        {
+            "Id": 190,
+            "Group": 8,
+            "Kind": "Item",
+            "Label": "gas can fill"
+        },
+        {
+            "Id": 191,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 192,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 193,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 194,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 195,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 196,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 197,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 198,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "rifle ammo"
+        },
+        {
+            "Id": 199,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "broken signal receiver"
+        },
+        {
+            "Id": 200,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 201,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 202,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 203,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "shotgun shells"
+        },
+        {
+            "Id": 204,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 205,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scrap in bin"
+        },
+        {
+            "Id": 206,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "ammo on desk"
+        },
+        {
+            "Id": 207,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "gunpowder on desk"
+        },
+        {
+            "Id": 208,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 209,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 210,
+            "Group": 4,
+            "Kind": "Item",
+            "Label": "relay"
+        },
+        {
+            "Id": 211,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "body tracking module"
+        },
+        {
+            "Id": 212,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "grenade"
+        },
+        {
+            "Id": 213,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 214,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 215,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "gunpowder"
+        },
+        {
+            "Id": 216,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 217,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "med"
+        },
+        {
+            "Id": 218,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "grenade"
+        },
+        {
+            "Id": 219,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 220,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "grenade"
+        },
+        {
+            "Id": 221,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 222,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "upstairs bench east"
+        },
+        {
+            "Id": 223,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "desk"
+        },
+        {
+            "Id": 224,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "near shop"
+        },
+        {
+            "Id": 225,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "bench"
+        },
+        {
+            "Id": 226,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "floor"
+        },
+        {
+            "Id": 227,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "office table"
+        },
+        {
+            "Id": 228,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "leon\u0027s table"
+        },
+        {
+            "Id": 229,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "stars charm"
+        },
+        {
+            "Id": 230,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "bench"
+        },
+        {
+            "Id": 231,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "floor"
+        },
+        {
+            "Id": 232,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "handgun ammo"
+        },
+        {
+            "Id": 233,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "handgun ammo"
+        },
+        {
+            "Id": 234,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "operations"
+        },
+        {
+            "Id": 235,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "table"
+        },
+        {
+            "Id": 236,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "table"
+        },
+        {
+            "Id": 237,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "bench"
+        },
+        {
+            "Id": 238,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "jack"
+        },
+        {
+            "Id": 239,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "table"
+        },
+        {
+            "Id": 240,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "upstairs floor"
+        },
+        {
+            "Id": 241,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "near PC"
+        },
+        {
+            "Id": 242,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "office table"
+        },
+        {
+            "Id": 243,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "rebecca table"
+        },
+        {
+            "Id": 244,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "case"
+        },
+        {
+            "Id": 245,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "shotgun shells"
+        },
+        {
+            "Id": 246,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "upstairs bench west"
+        },
+        {
+            "Id": 247,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scope"
+        },
+        {
+            "Id": 248,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "cute bear charm"
+        },
+        {
+            "Id": 249,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "tracking module"
+        },
+        {
+            "Id": 250,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "injector"
+        },
+        {
+            "Id": 251,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "injector"
+        },
+        {
+            "Id": 252,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "w870"
+        },
+        {
+            "Id": 253,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "med injector"
+        },
+        {
+            "Id": 254,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 255,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "shotgun shells"
+        },
+        {
+            "Id": 256,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "rifle ammo"
+        },
+        {
+            "Id": 257,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "smg ammo"
+        },
+        {
+            "Id": 258,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "med injector"
+        },
+        {
+            "Id": 259,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 260,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 261,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "rifle ammo"
+        },
+        {
+            "Id": 262,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "smg ammo"
+        },
+        {
+            "Id": 263,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "handgun ammo"
+        },
+        {
+            "Id": 264,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "small gunpowder"
+        },
+        {
+            "Id": 265,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "shotgun shells"
+        },
+        {
+            "Id": 266,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 267,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "large gunpowder"
+        },
+        {
+            "Id": 268,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scrap"
+        },
+        {
+            "Id": 269,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 270,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "magnum ammo"
+        },
+        {
+            "Id": 271,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "rifle ammo"
+        },
+        {
+            "Id": 272,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 273,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "med injector"
+        },
+        {
+            "Id": 274,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "scrap in pipe"
+        },
+        {
+            "Id": 275,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "green herb"
+        },
+        {
+            "Id": 276,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "box"
+        },
+        {
+            "Id": 277,
+            "Group": 7,
+            "Kind": "Item",
+            "Label": "tracking module"
+        }
+    ],
+    "Edges": [
+        {
+            "Source": 1,
+            "Destination": 2,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 3,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 1,
+            "Destination": 4,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 5,
+            "Destination": 1,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 4,
+            "Destination": 6,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 5,
+            "Destination": 7,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 6,
+            "Destination": 8,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 7,
+            "Destination": 9,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 10,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 8,
+            "Destination": 11,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 9,
+            "Destination": 12,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 9,
+            "Destination": 13,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 14,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 15,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 16,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 17,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 18,
+            "Destination": 9,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 11,
+            "Destination": 7,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 12,
+            "Destination": 19,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 3,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 12,
+            "Destination": 20,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 21,
+            "Destination": 12,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 12,
+            "Destination": 22,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 13,
+            "Destination": 23,
+            "Kind": "NoReturn",
+            "Requires": []
+        },
+        {
+            "Source": 24,
+            "Destination": 18,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 20,
+            "Destination": 25,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 20,
+            "Destination": 26,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 27,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 28,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 29,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 30,
+            "Destination": 21,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 22,
+            "Destination": 31,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 32,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 22,
+            "Destination": 33,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 23,
+            "Destination": 34,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 24,
+            "Destination": 35,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 24,
+            "Destination": 36,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 25,
+            "Destination": 37,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 38,
+            "Destination": 30,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 31,
+            "Destination": 39,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 31,
+            "Destination": 40,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 41,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 42,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 43,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 34,
+            "Destination": 44,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 45,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 46,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 47,
+            "Destination": 35,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 37,
+            "Destination": 48,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 49,
+            "Destination": 38,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 40,
+            "Destination": 41,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 50,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 50,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 40,
+            "Destination": 51,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 40,
+            "Destination": 52,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 53,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 54,
+            "Destination": 40,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 55,
+            "Destination": 41,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 56,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 3,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 41,
+            "Destination": 57,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 58,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 59,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 60,
+            "Destination": 41,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 59,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 42,
+            "Destination": 61,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 62,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 44,
+            "Destination": 63,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 64,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 44,
+            "Destination": 65,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 45,
+            "Destination": 66,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 47,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 68,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 48,
+            "Destination": 49,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 49,
+            "Destination": 69,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 59,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 51,
+            "Destination": 54,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 52,
+            "Destination": 70,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 71,
+            "Destination": 55,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 57,
+            "Destination": 60,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 72,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 73,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 74,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 75,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 60,
+            "Destination": 76,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 62,
+            "Destination": 77,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 62,
+            "Destination": 78,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 65,
+            "Destination": 79,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 65,
+            "Destination": 80,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 66,
+            "Destination": 81,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 66,
+            "Destination": 82,
+            "Kind": "NoReturn",
+            "Requires": []
+        },
+        {
+            "Source": 69,
+            "Destination": 67,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 68,
+            "Destination": 83,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 70,
+            "Destination": 71,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 43,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 71,
+            "Destination": 84,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 72,
+            "Destination": 85,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 74,
+            "Destination": 86,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 79,
+            "Destination": 87,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 80,
+            "Destination": 88,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 82,
+            "Destination": 89,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 83,
+            "Destination": 90,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 84,
+            "Destination": 91,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 92,
+            "Destination": 84,
+            "Kind": "UnlockTwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 85,
+            "Destination": 5,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 88,
+            "Destination": 93,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 27,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 28,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 29,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 88,
+            "Destination": 94,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 89,
+            "Destination": 95,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 90,
+            "Destination": 24,
+            "Kind": "OneWay",
+            "Requires": []
+        },
+        {
+            "Source": 91,
+            "Destination": 96,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 97,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 96,
+            "Destination": 92,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 93,
+            "Destination": 98,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 99,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 94,
+            "Destination": 100,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 101,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 102,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 98,
+            "Destination": 103,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 102,
+            "Destination": 104,
+            "Kind": "UnlockTwoWay",
+            "Requires": [
+                {
+                    "Kind": "Key",
+                    "Id": 105,
+                    "Soft": false
+                },
+                {
+                    "Kind": "Key",
+                    "Id": 106,
+                    "Soft": false
+                }
+            ]
+        },
+        {
+            "Source": 104,
+            "Destination": 107,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 107,
+            "Destination": 108,
+            "Kind": "NoReturn",
+            "Requires": []
+        },
+        {
+            "Source": 108,
+            "Destination": 109,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 109,
+            "Destination": 110,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 110,
+            "Destination": 111,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 112,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 113,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 2,
+            "Destination": 114,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 4,
+            "Destination": 115,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 4,
+            "Destination": 116,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 4,
+            "Destination": 117,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 9,
+            "Destination": 118,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 9,
+            "Destination": 119,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 9,
+            "Destination": 120,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 12,
+            "Destination": 121,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 12,
+            "Destination": 122,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 19,
+            "Destination": 123,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 25,
+            "Destination": 124,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 25,
+            "Destination": 125,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 25,
+            "Destination": 126,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 26,
+            "Destination": 127,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 26,
+            "Destination": 128,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 37,
+            "Destination": 129,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 69,
+            "Destination": 130,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 69,
+            "Destination": 131,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 21,
+            "Destination": 132,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 22,
+            "Destination": 133,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 22,
+            "Destination": 134,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 39,
+            "Destination": 135,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 39,
+            "Destination": 136,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 39,
+            "Destination": 137,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 138,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 139,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 140,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 141,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 142,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 143,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 144,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 145,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 146,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 147,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 41,
+            "Destination": 148,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 149,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 150,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 151,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 152,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 153,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 154,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 155,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 51,
+            "Destination": 156,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 54,
+            "Destination": 157,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 54,
+            "Destination": 158,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 70,
+            "Destination": 159,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 55,
+            "Destination": 160,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 55,
+            "Destination": 161,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 55,
+            "Destination": 162,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 84,
+            "Destination": 163,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 91,
+            "Destination": 164,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 91,
+            "Destination": 165,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 96,
+            "Destination": 166,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 96,
+            "Destination": 167,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 96,
+            "Destination": 168,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 92,
+            "Destination": 169,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 56,
+            "Destination": 170,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 56,
+            "Destination": 171,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 172,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 173,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 174,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 175,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 176,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 33,
+            "Destination": 177,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 178,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 179,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 180,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 181,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 182,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 58,
+            "Destination": 183,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 184,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 185,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 186,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 187,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 60,
+            "Destination": 188,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 74,
+            "Destination": 189,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 86,
+            "Destination": 190,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 72,
+            "Destination": 191,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 85,
+            "Destination": 192,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 5,
+            "Destination": 193,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 5,
+            "Destination": 194,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 5,
+            "Destination": 195,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 196,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 197,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 198,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 199,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 200,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 201,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 42,
+            "Destination": 202,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 61,
+            "Destination": 203,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 61,
+            "Destination": 204,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 205,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 206,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 207,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 208,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 67,
+            "Destination": 209,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 210,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 211,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 212,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 213,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 214,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 215,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 216,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 217,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 218,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 219,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 47,
+            "Destination": 220,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 35,
+            "Destination": 221,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 222,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 223,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 224,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 225,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 34,
+            "Destination": 226,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 44,
+            "Destination": 227,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 44,
+            "Destination": 228,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 63,
+            "Destination": 229,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 65,
+            "Destination": 230,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 65,
+            "Destination": 231,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 79,
+            "Destination": 232,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 80,
+            "Destination": 233,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 87,
+            "Destination": 234,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 87,
+            "Destination": 235,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 88,
+            "Destination": 236,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 93,
+            "Destination": 237,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 94,
+            "Destination": 238,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 94,
+            "Destination": 239,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 94,
+            "Destination": 240,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 98,
+            "Destination": 241,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 98,
+            "Destination": 242,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 98,
+            "Destination": 243,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 103,
+            "Destination": 244,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 100,
+            "Destination": 245,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 100,
+            "Destination": 246,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 81,
+            "Destination": 247,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 81,
+            "Destination": 248,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 81,
+            "Destination": 249,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 81,
+            "Destination": 250,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 81,
+            "Destination": 251,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 82,
+            "Destination": 252,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 253,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 254,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 255,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 256,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 257,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 258,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 95,
+            "Destination": 259,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 260,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 261,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 262,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 263,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 264,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 265,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 266,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 267,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 111,
+            "Destination": 268,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 269,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 270,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 271,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 272,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 273,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 274,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 275,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 276,
+            "Kind": "TwoWay",
+            "Requires": []
+        },
+        {
+            "Source": 112,
+            "Destination": 277,
+            "Kind": "TwoWay",
+            "Requires": []
+        }
+    ]
+}

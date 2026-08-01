@@ -30,6 +30,37 @@ namespace IntelOrca.Biohazard.BioRand.Common.Tests
             Assert.True(route.AllNodesVisited);
         }
 
+        /// <summary>
+        /// Tests a graph with a OneWay chain dead-ending in a fork where multiple
+        /// consumable keys compete for limited item slots, consistently producing
+        /// incomplete routes across all seeds.
+        /// </summary>
+        [Fact]
+        public void Example_RE9_MultiConsumable()
+        {
+            var json = GetEmbeddedResource("data.re9_multiconsume.json");
+            var graph = Graph.FromJson(json);
+
+            for (var seed = 0; seed < 20; seed++)
+            {
+                var route = graph.GenerateRoute(seed);
+                Assert.False(route.AllNodesVisited,
+                    $"Seed {seed}: expected incomplete route but got complete.\nLog:\n{route.Log}");
+
+                var result = route.Solve();
+                Assert.True(result.HasFlag(RouteSolverResult.NodesRemaining),
+                    $"Seed {seed}: expected NodesRemaining but got {result}");
+            }
+        }
+
+        private static string GetEmbeddedResource(string name)
+        {
+            var resourceName = $"IntelOrca.Biohazard.BioRand.Common.Tests.{name}";
+            using var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            using var reader = new StreamReader(stream!);
+            return reader.ReadToEnd();
+        }
+
         private static TestCaseGraph GetTestCase(string name, int player, int scenario)
         {
             var exampleGraph = GetExampleGraph(name);

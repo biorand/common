@@ -16,21 +16,67 @@ namespace IntelOrca.Biohazard.BioRand.Routing
         public RouteSolverResult Solve(Route route)
         {
             var state = Begin(route);
-            while (true)
+            return TrySolve(state)
+                ? RouteSolverResult.Ok
+                : RouteSolverResult.PotentialSoftlock | RouteSolverResult.NodesRemaining;
+        }
+
+        /// <summary>
+        /// Recursively tries all orderings of consumable key usage.
+        /// Returns true if a path exists that visits all reachable nodes
+        /// without getting stuck.
+        /// </summary>
+        private static bool TrySolve(State state)
+        {
+            state = Expand(state);
+
+            var possibleWays = state.Next
+                .Where(x => HasAllKeys(state, x))
+                .ToArray();
+
+            // Process non-consumable edges first — these are always safe
+            // because reusable keys aren't depleted by using them.
+            var safeWays = possibleWays
+                .Where(x => x.RequiredKeys.All(k => k.Kind != KeyKind.Consumable))
+                .ToArray();
+            if (safeWays.Length != 0)
             {
-                state = Expand(state);
-                var newState = UseKey(state);
-                if (newState == null)
-                    return RouteSolverResult.PotentialSoftlock | RouteSolverResult.NodesRemaining;
-                if (newState == state)
-                    break;
-                state = newState;
+                foreach (var way in safeWays)
+                    state = state.Visit(way);
+
+                // After visiting safe edges we may have revealed new rooms
+                // with new edges. Recurse to process them.
+                return TrySolve(state);
             }
 
-            RouteSolverResult flags = 0;
-            if (state.Next.Count != 0)
-                flags |= RouteSolverResult.NodesRemaining;
-            return flags;
+            // Only consumable-key edges remain
+            var consumableWays = possibleWays
+                .Where(x => x.RequiredKeys.Any(k => k.Kind == KeyKind.Consumable))
+                .ToArray();
+
+            if (consumableWays.Length == 0)
+            {
+                // No more progress possible — success if nothing left pending
+                return state.Next.Count == 0;
+            }
+
+            // Try each consumable edge. If ANY ordering leads to all nodes
+            // visited, the route is solvable (no guaranteed softlock).
+            // Only report potential softlock when ALL orderings fail.
+            foreach (var way in consumableWays)
+            {
+                var newState = state;
+                var consumeKeys = way.RequiredKeys
+                    .Where(k => k.Kind == KeyKind.Consumable)
+                    .ToArray();
+                newState = newState.UseKeys(consumeKeys);
+                newState = newState.Visit(way);
+
+                if (TrySolve(newState))
+                    return true;
+            }
+
+            return false;
         }
 
         private static State Begin(Route route)
@@ -60,42 +106,6 @@ namespace IntelOrca.Biohazard.BioRand.Routing
                 }
                 state = state.Visit(newVisits);
             } while (newVisits.Count != 0);
-            return state;
-        }
-
-        private static State? UseKey(State state)
-        {
-            var graph = state.Route.Graph;
-            var possibleWays = state.Next
-                .Where(x => HasAllKeys(state, x))
-                .ToArray();
-
-            // Lets first unlock anything that doesn't consume a key
-            var safeWays = possibleWays
-                .Where(x => x.RequiredKeys.All(x => x.Kind != KeyKind.Consumable))
-                .ToArray();
-            if (safeWays.Length != 0)
-            {
-                foreach (var way in safeWays)
-                {
-                    state = state.Visit(way);
-                }
-                return state;
-            }
-
-            // Process one consumable edge at a time so that keys discovered
-            // behind opened doors can be used for subsequent doors.
-            if (possibleWays.Length > 0)
-            {
-                var way = possibleWays[0];
-                var consumeKeys = way.RequiredKeys
-                    .Where(x => x.Kind == KeyKind.Consumable)
-                    .ToArray();
-                state = state.UseKeys(consumeKeys);
-                state = state.Visit(way);
-                return state;
-            }
-
             return state;
         }
 
