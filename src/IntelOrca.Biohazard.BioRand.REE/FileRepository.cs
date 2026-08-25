@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using IntelOrca.Biohazard.BioRand;
 using IntelOrca.Biohazard.REE;
 using IntelOrca.Biohazard.REE.Package;
 
@@ -51,7 +52,9 @@ namespace IntelOrca.Biohazard.BioRand.REE
 
         public void SetFile(string path, byte[] data)
         {
-            _outputFiles[path] = data;
+            // Game data paths can have inconsistent casing; store canonical paths so
+            // output archives don't contain ambiguous folders on case-sensitive file systems.
+            _outputFiles[ZipFileBuilder.NormalizePath(path)] = data;
         }
 
         public void WriteOutputPakFile(string path)
