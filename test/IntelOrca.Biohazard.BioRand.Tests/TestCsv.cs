@@ -116,6 +116,62 @@ C";
             Assert.Equal("Alice \"The Great\"", result[0].Name);
         }
 
+        [Theory]
+        [InlineData("\"\"\"The Baby\"\"\"", "\"The Baby\"")]
+        [InlineData("\"\"\"start\"", "\"start")]
+        [InlineData("\"end\"\"\"", "end\"")]
+        [InlineData("\"DefaultMapStartNodeID=\"\"-1\"\" tension=Normal\"", "DefaultMapStartNodeID=\"-1\" tension=Normal")]
+        [InlineData("\"\"\"\"", "\"")]
+        [InlineData("\"\"\"\"\"\"", "\"\"")]
+        [InlineData("\"Alice, Smith\"", "Alice, Smith")]
+        [InlineData("\"\"\"hello,\"\"\r\nworld\"", "\"hello,\"\r\nworld")]
+        [InlineData("\" \r\n \"", " \r\n ")]
+        [InlineData("\"\"", "")]
+        public void Deserialize_QuotedFields_PreservesContent(string field, string expected)
+        {
+            var result = Csv.Deserialize<BasicModel>(Utf8($"Name,Id\r\n{field},1380"));
+
+            var row = Assert.Single(result);
+            Assert.Equal(expected, row.Name);
+            Assert.Equal(1380, row.Id);
+
+            var lastFieldResult = Csv.Deserialize<BasicModel>(Utf8($"Id,Name\r\n1380,{field}"));
+
+            var lastFieldRow = Assert.Single(lastFieldResult);
+            Assert.Equal(1380, lastFieldRow.Id);
+            Assert.Equal(expected, lastFieldRow.Name);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("  ")]
+        public void Deserialize_UnquotedEmptyOrWhitespaceField_RemainsUnset(string field)
+        {
+            var result = Csv.Deserialize<BasicModel>(Utf8($"Name,Id\r\n{field},1380"));
+
+            var row = Assert.Single(result);
+            Assert.Null(row.Name);
+            Assert.Equal(1380, row.Id);
+        }
+
+        [Fact]
+        public void Deserialize_QuotedEmptyNonStringField_RemainsUnset()
+        {
+            var result = Csv.Deserialize<NullableModel>(Utf8("Value\r\n\"\""));
+
+            Assert.Null(Assert.Single(result).Value);
+        }
+
+        [Fact]
+        public void Deserialize_QuotedHeaderWithLeadingEscapedQuote_RemainsUnmapped()
+        {
+            var result = Csv.Deserialize<BasicModel>(Utf8("\"\"\"Name\",Id\r\nAlice,1380"));
+
+            var row = Assert.Single(result);
+            Assert.Null(row.Name);
+            Assert.Equal(1380, row.Id);
+        }
+
         [Fact]
         public void Deserialize_MissingColumn_Ignored()
         {

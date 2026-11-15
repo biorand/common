@@ -62,7 +62,11 @@ namespace IntelOrca.Biohazard.BioRand
                         var prop = propertyMap[x];
                         if (prop != null)
                         {
-                            if (!string.IsNullOrWhiteSpace(t.Text))
+                            if (t.IsQuoted && prop.PropertyType == typeof(string))
+                            {
+                                prop.SetValue(element, t.Text);
+                            }
+                            else if (!string.IsNullOrWhiteSpace(t.Text))
                             {
                                 prop.SetValue(element, ParseValue(t.Text, prop.PropertyType));
                             }
@@ -247,6 +251,7 @@ namespace IntelOrca.Biohazard.BioRand
         {
             var tokens = ImmutableArray.CreateBuilder<Token>();
             var inQuotes = false;
+            var inHeader = true;
             var textStart = -1;
             for (var i = 0; i < buffer.Length; i++)
             {
@@ -262,6 +267,7 @@ namespace IntelOrca.Biohazard.BioRand
                     {
                         Finish(i);
                         tokens.Add(new Token(TokenKind.NewLine, "\n"));
+                        inHeader = false;
                     }
                     else if (b == '\r')
                     {
@@ -271,6 +277,7 @@ namespace IntelOrca.Biohazard.BioRand
                             if (buffer[i + 1] == '\n')
                             {
                                 tokens.Add(new Token(TokenKind.NewLine, "\r\n"));
+                                inHeader = false;
                                 i++;
                             }
                         }
@@ -292,11 +299,15 @@ namespace IntelOrca.Biohazard.BioRand
                         {
                             if (buffer[i + 1] == '"')
                             {
+                                if (textStart == -1 && !inHeader)
+                                {
+                                    textStart = i;
+                                }
                                 i++;
                                 continue;
                             }
                         }
-                        Finish(i);
+                        Finish(i, isQuoted: true);
                         inQuotes = false;
                     }
                     else if (textStart == -1)
@@ -309,28 +320,29 @@ namespace IntelOrca.Biohazard.BioRand
             tokens.Add(new Token(TokenKind.EOF, "\0"));
             return tokens.ToImmutable();
 
-            void Finish(int position)
+            void Finish(int position, bool isQuoted = false)
             {
                 if (textStart == -1)
                 {
-                    tokens.Add(new Token(TokenKind.Text, ""));
+                    tokens.Add(new Token(TokenKind.Text, "", isQuoted));
                 }
                 else
                 {
                     var length = position - textStart;
                     var text = Encoding.UTF8.GetString(buffer, textStart, length)
                         .Replace("\"\"", "\"");
-                    tokens.Add(new Token(TokenKind.Text, text));
+                    tokens.Add(new Token(TokenKind.Text, text, isQuoted));
                     textStart = -1;
                 }
             }
         }
 
         [DebuggerDisplay("{Kind} | {Text}")]
-        private readonly struct Token(TokenKind kind, string text)
+        private readonly struct Token(TokenKind kind, string text, bool isQuoted = false)
         {
             public TokenKind Kind { get; } = kind;
             public string Text { get; } = text;
+            public bool IsQuoted { get; } = isQuoted;
         }
 
         private enum TokenKind
